@@ -1,2 +1,13 @@
 postgres-data
 .venv
+external-data
+**.DS_Store
+__pycache__/
+*.pyc
+.vscode/
+.zed/
+.idea/
+*.iml
+node_modules/
+dist/
+build/

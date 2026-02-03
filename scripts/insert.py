@@ -1,7 +1,9 @@
 import json
 
+import pandas as pd
 import requests
 from faker import Faker
+from tqdm import tqdm
 
 fake =Faker()
 
@@ -55,15 +57,58 @@ def fetch_products(category: str = "", min_price: float = 0.0, max_price: float 
         print(f"Failed to fetch products: {response.text}")
 
 
+def load_csv_and_insert_bulk(path: str):
+
+    df = pd.read_csv(path)
+    df = df.sample(n=1000, random_state=42).reset_index(drop=True)
+
+    # Loop through columns and fill based on dtype
+    for col in df.columns:
+        if str(col) in ["description", "brand"]:
+            df[col] = df[col].fillna("")
+        else:
+            if pd.api.types.is_numeric_dtype(df[col]):
+                df[col] = df[col].fillna(0)
+
+            elif pd.api.types.is_bool_dtype(df[col]):
+                df[col] = df[col].fillna(False)
+
+            elif pd.api.types.is_datetime64_any_dtype(df[col]):
+                df[col] = df[col].fillna(method="ffill")  # or leave as is
+
+            else:  # object / string
+                df[col] = df[col].fillna("")
+    payloads = []
+    for idx, row in tqdm(df.iterrows(), total=len(df)):
+        row = dict(row)
+        try:
+            row = json.loads(json.dumps(row, default=str))
+            payloads.append(row)
+        except Exception as e:
+            print(f"Skipping row {idx} due to serialization error: {e}")
+            print(row)
+
+        if len(payloads) == 1000:
+            # print(payloads)
+            insert_bulk_products(payloads)
+            payloads.clear()
+            print(f"Inserted {idx + 1} products so far...")
+    if payloads:
+        insert_bulk_products(payloads)
+
+
 if __name__ == "__main__":
     # # Insert a single product
     # single_product_payload = create_product_payload()
-    # # print(single_product_payload)
+    # single_product_payload = {'title': 'Peowuieu Replacement Head Optical Pick-Up Lens with Bracket for -210A Player', 'asin': 'B0CHVQ63P3', 'description': "", 'category': 'CD, Disc & Tape Players', 'brand': "", 'image_url': 'https://m.media-amazon.com/images/I/51+ygjPR+uS._AC_UL320_.jpg', 'product_url': 'https://www.amazon.co.uk/dp/B0CHVQ63P3', 'price': 14.53, 'currency': 'GBP', 'country': 'UK', 'stock': 0, 'avg_rating': 0.0, 'review_count': 0, 'bought_in_last_month': 0, 'is_best_seller': False}
+    # print(single_product_payload)
     # insert_product(single_product_payload)
 
-    # Insert bulk products
-    bulk_product_payloads = [create_product_payload() for _ in range(10000)]
-    insert_bulk_products(bulk_product_payloads)
+    # # Insert bulk products
+    # bulk_product_payloads = [create_product_payload() for _ in range(10000)]
+    # insert_bulk_products(bulk_product_payloads)
 
     # # Fetch products with filters
     # fetch_products(category="Electronics", min_price=50.0, max_price=500.0)
+
+    load_csv_and_insert_bulk("external-data/processed_amazon_uk_products.csv")

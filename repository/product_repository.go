@@ -17,19 +17,29 @@ func (r *ProductRepository) CreateProduct(
 ) (*models.Product, error) {
 
 	query := `
-	INSERT INTO products (name, description, price, stock, category)
-	VALUES ($1, $2, $3, $4, $5)
+	INSERT INTO products (title, asin, description, category, brand, image_url, product_url, price, currency, country, stock, avg_rating, review_count, bought_in_last_month, is_best_seller, created_at, updated_at)
+	VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, NOW(), NOW())
 	RETURNING id, created_at, updated_at
 	`
 
 	err := config.DB.QueryRow(
 		ctx,
 		query,
-		p.Name,
+		p.Title,
+		p.ASIN,
 		p.Description,
-		p.Price,
-		p.Stock,
 		p.Category,
+		p.Brand,
+		p.ImageURL,
+		p.ProductURL,
+		p.Price,
+		p.Currency,
+		p.Country,
+		p.Stock,
+		p.AvgRating,
+		p.ReviewCount,
+		p.BoughtInLastMonth,
+		p.IsBestSeller,
 	).Scan(&p.ID, &p.CreatedAt, &p.UpdatedAt)
 
 	if err != nil {
@@ -53,18 +63,28 @@ func (r *ProductRepository) CreateProductsBulk(
 	batch := &pgx.Batch{}
 
 	query := `
-	INSERT INTO products (name, description, price, stock, category)
-	VALUES ($1, $2, $3, $4, $5)
+	INSERT INTO products (title, asin, description, category, brand, image_url, product_url, price, currency, country, stock, avg_rating, review_count, bought_in_last_month, is_best_seller, created_at, updated_at)
+	VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, NOW(), NOW())
 	RETURNING id, created_at, updated_at
 	`
 
 	for _, p := range products {
 		batch.Queue(query,
-			p.Name,
+			p.Title,
+			p.ASIN,
 			p.Description,
-			p.Price,
-			p.Stock,
 			p.Category,
+			p.Brand,
+			p.ImageURL,
+			p.ProductURL,
+			p.Price,
+			p.Currency,
+			p.Country,
+			p.Stock,
+			p.AvgRating,
+			p.ReviewCount,
+			p.BoughtInLastMonth,
+			p.IsBestSeller,
 		)
 	}
 
@@ -142,7 +162,7 @@ func (r *ProductRepository) GetProducts(
 		var p models.Product
 		err := rows.Scan(
 			&p.ID,
-			&p.Name,
+			&p.Title,
 			&p.Description,
 			&p.Price,
 			&p.Stock,

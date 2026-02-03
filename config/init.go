@@ -28,11 +28,21 @@ func Initialize() {
 	_, err := DB.Exec(context.Background(), `
 	CREATE TABLE IF NOT EXISTS products (
 		id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-		name VARCHAR(100) NOT NULL,
+		title TEXT NOT NULL,
+		asin VARCHAR(255) UNIQUE,
 		description TEXT,
+		category VARCHAR(255),
+		brand VARCHAR(255),
+		image_url TEXT,
+		product_url TEXT,
 		price NUMERIC(10, 2) NOT NULL,
+		currency VARCHAR(10) NOT NULL,
+		country VARCHAR(50),
 		stock INT NOT NULL DEFAULT 0,
-		category VARCHAR(50),
+		avg_rating NUMERIC(3, 2),
+		review_count INT,
+		bought_in_last_month INT,
+		is_best_seller BOOLEAN DEFAULT FALSE,
 		created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 		updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 	)`)

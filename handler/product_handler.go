@@ -25,7 +25,7 @@ func (h *ProductHandler) AddProduct(c *fiber.Ctx) error {
 		})
 	}
 
-	if product.Name == "" || product.Price <= 0 {
+	if product.Title == "" || product.Price <= 0 {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"error": "name and price are required",
 		})
