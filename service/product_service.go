@@ -28,16 +28,8 @@ func (s *ProductService) AddProductsBulk(
 
 func (s *ProductService) ListProducts(
 	ctx context.Context,
-	category string,
-	minPrice float64,
-	maxPrice float64,
-	limit int,
-	offset int,
+	prodcutFilter *models.ProductFilter,
 ) ([]models.Product, error) {
 
-	if limit <= 0 || limit > 100 {
-		limit = 20
-	}
-
-	return s.Repo.GetProducts(ctx, category, minPrice, maxPrice, limit, offset)
+	return s.Repo.GetProducts(ctx, prodcutFilter)
 }

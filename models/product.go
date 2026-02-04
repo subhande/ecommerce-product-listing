@@ -22,3 +22,86 @@ type Product struct {
 	CreatedAt         *time.Time `json:"created_at,omitempty"`
 	UpdatedAt         *time.Time `json:"updated_at,omitempty"`
 }
+
+type SortByEnum string
+type SortOrderEnum string
+
+const (
+	SortByPrice      SortByEnum = "price"
+	SortByPopularity SortByEnum = "bought_in_last_month"
+	SortByRating     SortByEnum = "avg_rating"
+)
+
+const (
+	SortOrderAsc  SortOrderEnum = "asc"
+	SortOrderDesc SortOrderEnum = "desc"
+)
+
+func (s SortByEnum) IsValid() bool {
+	switch s {
+	case SortByPrice, SortByPopularity, SortByRating:
+		return true
+	}
+	return false
+}
+
+func (o SortOrderEnum) IsValid() bool {
+	return o == SortOrderAsc || o == SortOrderDesc
+}
+
+type ProductFilter struct {
+	SearchQueryText string        `query:"search_query_text,omitempty"`
+	Category        string        `query:"category,omitempty"`
+	Brand           string        `query:"brand,omitempty"`
+	MinPrice        float64       `query:"min_price,omitempty"`
+	MaxPrice        float64       `query:"max_price,omitempty"`
+	PageSize        int           `query:"page_size,omitempty"`
+	Page            int           `query:"page,omitempty"`
+	ShowOutOfStock  bool          `query:"show_out_of_stock,omitempty"`
+	Rating          float64       `query:"rating,omitempty"`
+	ReviewCount     int           `query:"review_count,omitempty"`
+	SortByColumn    SortByEnum    `query:"sort_by_column,omitempty"`
+	SortOrder       SortOrderEnum `query:"sort_order,omitempty"`
+}
+
+func (f *ProductFilter) Normalize() {
+	if f.PageSize <= 0 || f.PageSize > 100 {
+		f.PageSize = 20
+	}
+	if f.Page <= 0 {
+		f.Page = 1
+	}
+	if f.MinPrice < 0 {
+		f.MinPrice = 0
+	}
+	if f.MaxPrice < 0 || f.MaxPrice <= f.MinPrice {
+		f.MaxPrice = 1e9 // A very high value
+	}
+
+	if !f.SortByColumn.IsValid() {
+		f.SortByColumn = SortByPopularity
+	}
+	if !f.SortOrder.IsValid() {
+		f.SortOrder = SortOrderDesc
+	}
+}
+
+const (
+	DefaultPageSize  = 20
+	MaxPageSize      = 100
+	DefaultPage      = 1
+	DefaultMaxPrice  = 1e9
+	DefaultSortBy    = SortByPopularity
+	DefaultSortOrder = SortOrderDesc
+)
+
+func NewProductFilter() *ProductFilter {
+	return &ProductFilter{
+		PageSize:     DefaultPageSize,
+		Page:         DefaultPage,
+		MinPrice:     0,
+		MaxPrice:     DefaultMaxPrice,
+		SortByColumn: DefaultSortBy,
+		SortOrder:    DefaultSortOrder,
+	}
+}

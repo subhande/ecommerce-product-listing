@@ -4,7 +4,7 @@ import (
 	"context"
 	"ecommerce_product_listing/models"
 	"ecommerce_product_listing/service"
-	"strconv"
+	"fmt"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -93,21 +93,20 @@ func (h *ProductHandler) AddProductsBulk(c *fiber.Ctx) error {
 
 func (h *ProductHandler) GetProducts(c *fiber.Ctx) error {
 
-	category := c.Query("category")
+	productFilter := models.NewProductFilter()
+	// Log incoming query parameters
+	log.Info("Incoming query parameters:", fmt.Sprintf("%v", c.Queries()))
 
-	minPrice, _ := strconv.ParseFloat(c.Query("min_price"), 64)
-	maxPrice, _ := strconv.ParseFloat(c.Query("max_price"), 64)
-
-	limit, _ := strconv.Atoi(c.Query("limit", "20"))
-	offset, _ := strconv.Atoi(c.Query("offset", "0"))
-
+	if err := c.QueryParser(productFilter); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error":         "invalid request body",
+			"error_message": err.Error(),
+		})
+	}
+	log.Info("Parsed product filter:", fmt.Sprintf("%+v", productFilter))
 	products, err := h.Service.ListProducts(
 		c.Context(), // fasthttp context
-		category,
-		minPrice,
-		maxPrice,
-		limit,
-		offset,
+		productFilter,
 	)
 
 	if err != nil {
