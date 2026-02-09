@@ -94,6 +94,9 @@ func (h *ProductHandler) AddProductsBulk(c *fiber.Ctx) error {
 func (h *ProductHandler) GetProducts(c *fiber.Ctx) error {
 
 	productFilter := models.NewProductFilter()
+
+	// productFilter := &models.ProductFilter{}
+
 	// Log incoming query parameters
 	log.Info("Incoming query parameters:", fmt.Sprintf("%v", c.Queries()))
 
@@ -116,8 +119,36 @@ func (h *ProductHandler) GetProducts(c *fiber.Ctx) error {
 		})
 	}
 
+	count := len(products)
+
+	var lastID int
+	var sortLastValue interface{}
+
+	if count > 0 {
+		lastID = products[count-1].ID
+		if string(productFilter.SortByColumn) != "" {
+			product := products[count-1]
+			switch productFilter.SortByColumn {
+			case models.SortByPrice:
+				sortLastValue = fmt.Sprintf("%f", product.Price)
+			case models.SortByPopularity:
+				sortLastValue = fmt.Sprintf("%d", product.BoughtInLastMonth)
+			case models.SortByRating:
+				sortLastValue = fmt.Sprintf("%f", product.AvgRating)
+			case models.SortByModificationDate:
+				sortLastValue = product.UpdatedAt.Format(time.RFC3339)
+			default:
+				sortLastValue = nil
+			}
+		}
+	}
+
 	return c.JSON(fiber.Map{
-		"count": len(products),
-		"data":  products,
+		"count":           len(products),
+		"last_id":         lastID,
+		"sort_order":      productFilter.SortOrder,
+		"sort_last_value": sortLastValue,
+		"sort_by_column":  productFilter.SortByColumn,
+		"data":            products,
 	})
 }

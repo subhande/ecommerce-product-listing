@@ -5,6 +5,9 @@ import (
 	"ecommerce_product_listing/config"
 	"ecommerce_product_listing/models"
 	"fmt"
+	"log"
+	"strconv"
+	"time"
 
 	"github.com/jackc/pgx/v5"
 )
@@ -120,7 +123,7 @@ func (r *ProductRepository) GetProducts(
 ) ([]models.Product, error) {
 
 	query := `SELECT *
-			  FROM products WHERE 1=1`
+			  FROM products WHERE 1=1 `
 
 	args := []interface{}{}
 	argPos := 1
@@ -144,8 +147,26 @@ func (r *ProductRepository) GetProducts(
 		argPos++
 	}
 
-	if productFilter.ShowOutOfStock == false {
+	if productFilter.MinPrice != -1 {
+		query += fmt.Sprintf(" AND price >= $%d", argPos)
+		args = append(args, productFilter.MinPrice)
+		argPos++
+	}
+
+	if productFilter.MaxPrice != -1 {
+		query += fmt.Sprintf(" AND price <= $%d", argPos)
+		args = append(args, productFilter.MaxPrice)
+		argPos++
+	}
+
+	if !productFilter.ShowOutOfStock {
 		query += " AND stock > 0"
+	}
+
+	if productFilter.RatingMoreThanEqual > 0 {
+		query += fmt.Sprintf(" AND avg_rating >= $%d", argPos)
+		args = append(args, productFilter.RatingMoreThanEqual)
+		argPos++
 	}
 
 	if productFilter.ReviewCount > 0 {
@@ -154,27 +175,43 @@ func (r *ProductRepository) GetProducts(
 		argPos++
 	}
 
-	if productFilter.Rating > 0 {
-		query += fmt.Sprintf(" AND avg_rating >= $%d", argPos)
-		args = append(args, productFilter.Rating)
-		argPos++
+	if productFilter.LastID != -1 && productFilter.SortLastValue != "" {
+		operator := ">"
+		if productFilter.SortOrder == models.SortOrderDesc {
+			operator = "<"
+		}
+		var sortLastValue interface{}
+		var err error
+		switch productFilter.SortByColumn {
+		case models.SortByPrice, models.SortByRating:
+			sortLastValue, err = strconv.ParseFloat(productFilter.SortLastValue, 64)
+		case models.SortByPopularity:
+			sortLastValue, err = strconv.Atoi(productFilter.SortLastValue)
+		case models.SortByModificationDate:
+			sortLastValue, err = time.Parse(time.RFC3339, productFilter.SortLastValue)
+		default:
+			err = fmt.Errorf("unsupported sort column: %s", productFilter.SortByColumn)
+		}
+		if err != nil {
+			return nil, fmt.Errorf("invalid cursor value for %s: %w", productFilter.SortByColumn, err)
+		}
+		query += fmt.Sprintf(" AND (%s, id) %s ($%d, $%d)", productFilter.SortByColumn, operator, argPos, argPos+1)
+		args = append(args, sortLastValue, productFilter.LastID)
+		argPos += 2
 	}
 
-	// Add min and max price filters
-	query += fmt.Sprintf(" AND price >= $%d", argPos)
-	args = append(args, productFilter.MinPrice)
-	argPos++
+	// Order By KeySet (SortByColumn, ID)
+	direction := "ASC"
+	if productFilter.SortOrder == models.SortOrderDesc {
+		direction = "DESC"
+	}
+	query += fmt.Sprintf(" ORDER BY %s %s, id %s", productFilter.SortByColumn, direction, direction)
 
-	query += fmt.Sprintf(" AND price <= $%d", argPos)
-	args = append(args, productFilter.MaxPrice)
-	argPos++
+	query += fmt.Sprintf(" LIMIT $%d", argPos)
+	args = append(args, productFilter.PageSize)
 
-	offset := (productFilter.Page - 1) * productFilter.PageSize
-
-	query += fmt.Sprintf(" ORDER BY %s %s", productFilter.SortByColumn, productFilter.SortOrder)
-
-	query += fmt.Sprintf(" LIMIT $%d OFFSET $%d", argPos, argPos+1)
-	args = append(args, productFilter.PageSize, offset)
+	log.Printf("Constructed SQL query: %s", query)
+	log.Printf("With arguments: %v", args)
 
 	rows, err := config.DB.Query(ctx, query, args...)
 	if err != nil {

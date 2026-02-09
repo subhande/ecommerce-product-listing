@@ -27,9 +27,10 @@ type SortByEnum string
 type SortOrderEnum string
 
 const (
-	SortByPrice      SortByEnum = "price"
-	SortByPopularity SortByEnum = "bought_in_last_month"
-	SortByRating     SortByEnum = "avg_rating"
+	SortByPrice            SortByEnum = "price"
+	SortByPopularity       SortByEnum = "bought_in_last_month"
+	SortByRating           SortByEnum = "avg_rating"
+	SortByModificationDate SortByEnum = "updated_at"
 )
 
 const (
@@ -39,7 +40,7 @@ const (
 
 func (s SortByEnum) IsValid() bool {
 	switch s {
-	case SortByPrice, SortByPopularity, SortByRating:
+	case SortByPrice, SortByPopularity, SortByRating, SortByModificationDate:
 		return true
 	}
 	return false
@@ -50,32 +51,28 @@ func (o SortOrderEnum) IsValid() bool {
 }
 
 type ProductFilter struct {
-	SearchQueryText string        `query:"search_query_text,omitempty"`
-	Category        string        `query:"category,omitempty"`
-	Brand           string        `query:"brand,omitempty"`
-	MinPrice        float64       `query:"min_price,omitempty"`
-	MaxPrice        float64       `query:"max_price,omitempty"`
-	PageSize        int           `query:"page_size,omitempty"`
-	Page            int           `query:"page,omitempty"`
-	ShowOutOfStock  bool          `query:"show_out_of_stock,omitempty"`
-	Rating          float64       `query:"rating,omitempty"`
-	ReviewCount     int           `query:"review_count,omitempty"`
-	SortByColumn    SortByEnum    `query:"sort_by_column,omitempty"`
-	SortOrder       SortOrderEnum `query:"sort_order,omitempty"`
+	SearchQueryText     string        `query:"search_query_text,omitempty"`
+	Category            string        `query:"category,omitempty"`
+	Brand               string        `query:"brand,omitempty"`
+	MinPrice            float64       `query:"min_price,omitempty"`
+	MaxPrice            float64       `query:"max_price,omitempty"`
+	ShowOutOfStock      bool          `query:"show_out_of_stock,omitempty"`
+	RatingMoreThanEqual float64       `query:"rating_more_than_equal,omitempty"`
+	ReviewCount         int           `query:"review_count,omitempty"`
+	SortByColumn        SortByEnum    `query:"sort_by_column,omitempty"`
+	SortOrder           SortOrderEnum `query:"sort_order,omitempty"`
+	SortLastValue       string        `query:"sort_last_value,omitempty"`
+	LastID              int           `query:"last_id,omitempty"`
+	PageSize            int           `query:"page_size,omitempty"`
 }
 
 func (f *ProductFilter) Normalize() {
 	if f.PageSize <= 0 || f.PageSize > 100 {
 		f.PageSize = 20
 	}
-	if f.Page <= 0 {
-		f.Page = 1
-	}
-	if f.MinPrice < 0 {
-		f.MinPrice = 0
-	}
-	if f.MaxPrice < 0 || f.MaxPrice <= f.MinPrice {
-		f.MaxPrice = 1e9 // A very high value
+
+	if f.MinPrice != -1 && f.MaxPrice != -1 && f.MinPrice > f.MaxPrice {
+		f.MinPrice, f.MaxPrice = -1, -1
 	}
 
 	if !f.SortByColumn.IsValid() {
@@ -87,21 +84,28 @@ func (f *ProductFilter) Normalize() {
 }
 
 const (
-	DefaultPageSize  = 20
-	MaxPageSize      = 100
-	DefaultPage      = 1
-	DefaultMaxPrice  = 1e9
-	DefaultSortBy    = SortByPopularity
-	DefaultSortOrder = SortOrderDesc
+	DefaultPageSize            = 20
+	MaxPageSize                = 100
+	DefaultMinPrice            = -1
+	DefaultMaxPrice            = -1
+	DefaultSortBy              = SortByPopularity
+	DefaultSortOrder           = SortOrderDesc
+	DefaultLastID              = -1
+	DefaultReviewCount         = -1
+	DefaultShowOutOfStock      = false
+	DefaultRatingMoreThanEqual = -1
 )
 
 func NewProductFilter() *ProductFilter {
 	return &ProductFilter{
-		PageSize:     DefaultPageSize,
-		Page:         DefaultPage,
-		MinPrice:     0,
-		MaxPrice:     DefaultMaxPrice,
-		SortByColumn: DefaultSortBy,
-		SortOrder:    DefaultSortOrder,
+		PageSize:            DefaultPageSize,
+		MinPrice:            DefaultMinPrice,
+		MaxPrice:            DefaultMaxPrice,
+		SortByColumn:        DefaultSortBy,
+		SortOrder:           DefaultSortOrder,
+		LastID:              DefaultLastID,
+		ReviewCount:         DefaultReviewCount,
+		ShowOutOfStock:      DefaultShowOutOfStock,
+		RatingMoreThanEqual: DefaultRatingMoreThanEqual,
 	}
 }
