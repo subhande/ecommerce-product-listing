@@ -188,7 +188,7 @@ func (r *ProductRepository) GetProducts(
 		case models.SortByPopularity:
 			sortLastValue, err = strconv.Atoi(productFilter.SortLastValue)
 		case models.SortByModificationDate:
-			sortLastValue, err = time.Parse(time.RFC3339, productFilter.SortLastValue)
+			sortLastValue, err = time.Parse(time.RFC3339Nano, productFilter.SortLastValue)
 		default:
 			err = fmt.Errorf("unsupported sort column: %s", productFilter.SortByColumn)
 		}

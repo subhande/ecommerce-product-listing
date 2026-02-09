@@ -5,7 +5,7 @@ import requests
 from faker import Faker
 from tqdm import tqdm
 
-fake =Faker()
+fake = Faker()
 
 BASE_URL = "http://localhost:8080/api/v1/products"
 
@@ -14,9 +14,22 @@ INSERT_BULK_API = f"{BASE_URL}/bulk"
 FETCH_API = f"{BASE_URL}"
 
 product_categories = [
-    "Electronics", "Clothing", "Books", "Home & Kitchen", "Sports", "Toys", "Beauty", "Automotive", "Grocery",
-    "Health", "Garden", "Tools", "Office Supplies", "Pet Supplies"
+    "Electronics",
+    "Clothing",
+    "Books",
+    "Home & Kitchen",
+    "Sports",
+    "Toys",
+    "Beauty",
+    "Automotive",
+    "Grocery",
+    "Health",
+    "Garden",
+    "Tools",
+    "Office Supplies",
+    "Pet Supplies",
 ]
+
 
 def create_product_payload():
     return {
@@ -24,8 +37,9 @@ def create_product_payload():
         "description": fake.text(max_nb_chars=200),
         "price": round(fake.pyfloat(left_digits=3, right_digits=2, positive=True), 2),
         "stock": fake.random_int(min=0, max=1000),
-        "category": fake.random.choice(product_categories)
+        "category": fake.random.choice(product_categories),
     }
+
 
 def insert_product(payload):
     response = requests.post(INSERT_API, json=payload)
@@ -34,6 +48,7 @@ def insert_product(payload):
     else:
         print(f"Failed to insert product: {response.text}")
 
+
 def insert_bulk_products(payloads):
     response = requests.post(INSERT_BULK_API, json=payloads)
     if response.status_code == 201:
@@ -41,12 +56,13 @@ def insert_bulk_products(payloads):
     else:
         print(f"Failed to insert bulk products: {response.text}")
 
+
 def fetch_products(category: str = "", min_price: float = 0.0, max_price: float = float("inf")):
     params = {}
     if category:
-        params['category'] = category
-    params['min_price'] = min_price
-    params['max_price'] = max_price
+        params["category"] = category
+    params["min_price"] = min_price
+    params["max_price"] = max_price
     response = requests.get(FETCH_API, params=params)
     if response.status_code == 200:
         products = response.json()
@@ -60,6 +76,22 @@ def fetch_products(category: str = "", min_price: float = 0.0, max_price: float 
 def load_csv_and_insert_bulk(path: str):
 
     df = pd.read_csv(path)
+    # df = df[:10000]  # Limit to first 1000 rows for testing, can be removed for full dataset
+    # Select each category and sample 100
+    for category in df["category"].unique():
+        category_df = df[df["category"] == category]
+        if len(category_df) > 100:
+            category_sample = category_df.sample(n=100, random_state=42)
+        else:
+            category_sample = category_df
+        if "sampled_df" in locals():
+            sampled_df = pd.concat([sampled_df, category_sample], ignore_index=True)
+        else:
+            sampled_df = category_sample
+    df = sampled_df.reset_index(drop=True)
+
+    print(f"Total products after sampling: {len(df)}")
+
     df = df.sample(n=1000, random_state=42).reset_index(drop=True)
 
     # Loop through columns and fill based on dtype
@@ -86,7 +118,7 @@ def load_csv_and_insert_bulk(path: str):
             payloads.append(row)
         except Exception as e:
             print(f"Skipping row {idx} due to serialization error: {e}")
-            print(row)
+            # print(row)
 
         if len(payloads) == 1000:
             # print(payloads)

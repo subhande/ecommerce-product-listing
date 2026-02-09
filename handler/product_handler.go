@@ -136,7 +136,7 @@ func (h *ProductHandler) GetProducts(c *fiber.Ctx) error {
 			case models.SortByRating:
 				sortLastValue = fmt.Sprintf("%f", product.AvgRating)
 			case models.SortByModificationDate:
-				sortLastValue = product.UpdatedAt.Format(time.RFC3339)
+				sortLastValue = product.UpdatedAt.Format(time.RFC3339Nano)
 			default:
 				sortLastValue = nil
 			}
@@ -149,6 +149,6 @@ func (h *ProductHandler) GetProducts(c *fiber.Ctx) error {
 		"sort_order":      productFilter.SortOrder,
 		"sort_last_value": sortLastValue,
 		"sort_by_column":  productFilter.SortByColumn,
-		"data":            products,
+		"products":        products,
 	})
 }
