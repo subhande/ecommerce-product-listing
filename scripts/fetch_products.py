@@ -44,31 +44,21 @@ queries = [
     },
 ]
 
+response_times = {}
+
 for query in queries:
     name = query["name"]
     query_params = query["query"]
+    response_times[name] = []
     start = time.time()
     page_no = 1
-    response = requests.get(FETCH_API, params=query_params)
-    if response.status_code != 200:
-        print(f"Failed to fetch products for query {name}: {response.text}")
-        continue
-    end = time.time()
-    print(f"Query: {name} Page: {page_no}: {end - start:.4f} seconds")
-    page_no += 1
 
-    response = response.json()
-
-    products = response.get("products", [])
-    product_ids = [product["id"] for product in products]
-    print(f"Fetched {len(product_ids)} products: {product_ids}")
-
-    last_id = response.get("last_id", None)
-    sort_by_column = response.get("sort_by_column", "")
-    sort_order = response.get("sort_order", "asc")
-    sort_last_value = response.get("sort_last_value", None)
-    count = response.get("count", 0)
-
+    last_id = -1
+    sort_by_column = query_params.get("sort_by_column", "")
+    sort_order = query_params.get("sort_order", "asc")
+    sort_last_value = None
+    page_no = 1
+    count = 1
     while count > 0:
         query_next = copy.deepcopy(query_params)
         query_next.update(
@@ -87,6 +77,7 @@ for query in queries:
             break
         end = time.time()
         print(f"Query: {name} Page: {page_no}: {end - start:.4f} seconds")
+        response_times[name].append({"page": page_no, "response_time_ms": round((end - start) * 1000)})
         page_no += 1
 
         response = response.json()
@@ -100,3 +91,7 @@ for query in queries:
         sort_order = response.get("sort_order", "asc")
         sort_last_value = response.get("sort_last_value", None)
         count = response.get("count", 0)
+
+print("\n\nResponse Times (ms):")
+for name, times in response_times.items():
+    print(f"{name}: {times}")
