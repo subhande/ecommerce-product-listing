@@ -1,0 +1,846 @@
+{
+    "Popular Products (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 5
+        },
+        {
+            "page": 101,
+            "response_time_ms": 3
+        },
+        {
+            "page": 201,
+            "response_time_ms": 3
+        },
+        {
+            "page": 301,
+            "response_time_ms": 3
+        },
+        {
+            "page": 401,
+            "response_time_ms": 2
+        },
+        {
+            "page": 501,
+            "response_time_ms": 3
+        },
+        {
+            "page": 601,
+            "response_time_ms": 7
+        },
+        {
+            "page": 701,
+            "response_time_ms": 3
+        },
+        {
+            "page": 801,
+            "response_time_ms": 3
+        },
+        {
+            "page": 901,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1001,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1101,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1201,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1301,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1401,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1501,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1601,
+            "response_time_ms": 4
+        },
+        {
+            "page": 1701,
+            "response_time_ms": 6
+        },
+        {
+            "page": 1801,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1901,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1981,
+            "response_time_ms": 3
+        }
+    ],
+    "Popular Products (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 3
+        },
+        {
+            "page": 101,
+            "response_time_ms": 10
+        },
+        {
+            "page": 201,
+            "response_time_ms": 16
+        },
+        {
+            "page": 301,
+            "response_time_ms": 9
+        },
+        {
+            "page": 401,
+            "response_time_ms": 10
+        },
+        {
+            "page": 501,
+            "response_time_ms": 12
+        },
+        {
+            "page": 601,
+            "response_time_ms": 13
+        },
+        {
+            "page": 701,
+            "response_time_ms": 14
+        },
+        {
+            "page": 801,
+            "response_time_ms": 14
+        },
+        {
+            "page": 901,
+            "response_time_ms": 15
+        },
+        {
+            "page": 1001,
+            "response_time_ms": 16
+        },
+        {
+            "page": 1101,
+            "response_time_ms": 15
+        },
+        {
+            "page": 1201,
+            "response_time_ms": 17
+        },
+        {
+            "page": 1301,
+            "response_time_ms": 17
+        },
+        {
+            "page": 1401,
+            "response_time_ms": 17
+        },
+        {
+            "page": 1501,
+            "response_time_ms": 18
+        },
+        {
+            "page": 1601,
+            "response_time_ms": 19
+        },
+        {
+            "page": 1701,
+            "response_time_ms": 20
+        },
+        {
+            "page": 1801,
+            "response_time_ms": 20
+        },
+        {
+            "page": 1901,
+            "response_time_ms": 21
+        },
+        {
+            "page": 1981,
+            "response_time_ms": 22
+        }
+    ],
+    "Price Low to High (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 2
+        },
+        {
+            "page": 101,
+            "response_time_ms": 2
+        },
+        {
+            "page": 201,
+            "response_time_ms": 2
+        },
+        {
+            "page": 301,
+            "response_time_ms": 2
+        },
+        {
+            "page": 401,
+            "response_time_ms": 3
+        },
+        {
+            "page": 501,
+            "response_time_ms": 2
+        },
+        {
+            "page": 601,
+            "response_time_ms": 3
+        },
+        {
+            "page": 701,
+            "response_time_ms": 3
+        },
+        {
+            "page": 801,
+            "response_time_ms": 2
+        },
+        {
+            "page": 901,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1001,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1101,
+            "response_time_ms": 7
+        },
+        {
+            "page": 1201,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1301,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1401,
+            "response_time_ms": 4
+        },
+        {
+            "page": 1501,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1601,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1701,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1801,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1901,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1981,
+            "response_time_ms": 2
+        }
+    ],
+    "Price Low to High (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 3
+        },
+        {
+            "page": 101,
+            "response_time_ms": 11
+        },
+        {
+            "page": 201,
+            "response_time_ms": 13
+        },
+        {
+            "page": 301,
+            "response_time_ms": 12
+        },
+        {
+            "page": 401,
+            "response_time_ms": 14
+        },
+        {
+            "page": 501,
+            "response_time_ms": 17
+        },
+        {
+            "page": 601,
+            "response_time_ms": 20
+        },
+        {
+            "page": 701,
+            "response_time_ms": 22
+        },
+        {
+            "page": 801,
+            "response_time_ms": 22
+        },
+        {
+            "page": 901,
+            "response_time_ms": 24
+        },
+        {
+            "page": 1001,
+            "response_time_ms": 27
+        },
+        {
+            "page": 1101,
+            "response_time_ms": 31
+        },
+        {
+            "page": 1201,
+            "response_time_ms": 33
+        },
+        {
+            "page": 1301,
+            "response_time_ms": 32
+        },
+        {
+            "page": 1401,
+            "response_time_ms": 36
+        },
+        {
+            "page": 1501,
+            "response_time_ms": 37
+        },
+        {
+            "page": 1601,
+            "response_time_ms": 40
+        },
+        {
+            "page": 1701,
+            "response_time_ms": 43
+        },
+        {
+            "page": 1801,
+            "response_time_ms": 44
+        },
+        {
+            "page": 1901,
+            "response_time_ms": 49
+        },
+        {
+            "page": 1981,
+            "response_time_ms": 52
+        }
+    ],
+    "Rating High to Low (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 3
+        },
+        {
+            "page": 101,
+            "response_time_ms": 2
+        },
+        {
+            "page": 201,
+            "response_time_ms": 2
+        },
+        {
+            "page": 301,
+            "response_time_ms": 3
+        },
+        {
+            "page": 401,
+            "response_time_ms": 3
+        },
+        {
+            "page": 501,
+            "response_time_ms": 3
+        },
+        {
+            "page": 601,
+            "response_time_ms": 3
+        },
+        {
+            "page": 701,
+            "response_time_ms": 2
+        },
+        {
+            "page": 801,
+            "response_time_ms": 3
+        },
+        {
+            "page": 901,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1101,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1201,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1301,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1401,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1501,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1601,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1701,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1801,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1901,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1981,
+            "response_time_ms": 2
+        }
+    ],
+    "Rating High to Low (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 3
+        },
+        {
+            "page": 101,
+            "response_time_ms": 9
+        },
+        {
+            "page": 201,
+            "response_time_ms": 15
+        },
+        {
+            "page": 301,
+            "response_time_ms": 11
+        },
+        {
+            "page": 401,
+            "response_time_ms": 14
+        },
+        {
+            "page": 501,
+            "response_time_ms": 17
+        },
+        {
+            "page": 601,
+            "response_time_ms": 17
+        },
+        {
+            "page": 701,
+            "response_time_ms": 19
+        },
+        {
+            "page": 801,
+            "response_time_ms": 23
+        },
+        {
+            "page": 901,
+            "response_time_ms": 23
+        },
+        {
+            "page": 1001,
+            "response_time_ms": 23
+        },
+        {
+            "page": 1101,
+            "response_time_ms": 27
+        },
+        {
+            "page": 1201,
+            "response_time_ms": 44
+        },
+        {
+            "page": 1301,
+            "response_time_ms": 101
+        },
+        {
+            "page": 1401,
+            "response_time_ms": 31
+        },
+        {
+            "page": 1501,
+            "response_time_ms": 32
+        },
+        {
+            "page": 1601,
+            "response_time_ms": 33
+        },
+        {
+            "page": 1701,
+            "response_time_ms": 36
+        },
+        {
+            "page": 1801,
+            "response_time_ms": 37
+        },
+        {
+            "page": 1901,
+            "response_time_ms": 36
+        },
+        {
+            "page": 1981,
+            "response_time_ms": 37
+        }
+    ],
+    "Recently Updated (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 2
+        },
+        {
+            "page": 101,
+            "response_time_ms": 2
+        },
+        {
+            "page": 201,
+            "response_time_ms": 3
+        },
+        {
+            "page": 301,
+            "response_time_ms": 3
+        },
+        {
+            "page": 401,
+            "response_time_ms": 3
+        },
+        {
+            "page": 501,
+            "response_time_ms": 2
+        },
+        {
+            "page": 601,
+            "response_time_ms": 3
+        },
+        {
+            "page": 701,
+            "response_time_ms": 2
+        },
+        {
+            "page": 801,
+            "response_time_ms": 2
+        },
+        {
+            "page": 901,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1101,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1201,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1301,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1401,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1501,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1601,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1701,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1801,
+            "response_time_ms": 3
+        },
+        {
+            "page": 1901,
+            "response_time_ms": 2
+        },
+        {
+            "page": 1981,
+            "response_time_ms": 3
+        }
+    ],
+    "Recently Updated (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 3
+        },
+        {
+            "page": 101,
+            "response_time_ms": 5
+        },
+        {
+            "page": 201,
+            "response_time_ms": 8
+        },
+        {
+            "page": 301,
+            "response_time_ms": 9
+        },
+        {
+            "page": 401,
+            "response_time_ms": 9
+        },
+        {
+            "page": 501,
+            "response_time_ms": 7
+        },
+        {
+            "page": 601,
+            "response_time_ms": 9
+        },
+        {
+            "page": 701,
+            "response_time_ms": 9
+        },
+        {
+            "page": 801,
+            "response_time_ms": 10
+        },
+        {
+            "page": 901,
+            "response_time_ms": 12
+        },
+        {
+            "page": 1001,
+            "response_time_ms": 12
+        },
+        {
+            "page": 1101,
+            "response_time_ms": 14
+        },
+        {
+            "page": 1201,
+            "response_time_ms": 14
+        },
+        {
+            "page": 1301,
+            "response_time_ms": 16
+        },
+        {
+            "page": 1401,
+            "response_time_ms": 15
+        },
+        {
+            "page": 1501,
+            "response_time_ms": 15
+        },
+        {
+            "page": 1601,
+            "response_time_ms": 16
+        },
+        {
+            "page": 1701,
+            "response_time_ms": 16
+        },
+        {
+            "page": 1801,
+            "response_time_ms": 17
+        },
+        {
+            "page": 1901,
+            "response_time_ms": 17
+        },
+        {
+            "page": 1981,
+            "response_time_ms": 19
+        }
+    ],
+    "Filter by Category - Price Low to High (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 2
+        },
+        {
+            "page": 2,
+            "response_time_ms": 2
+        }
+    ],
+    "Filter by Category - Price Low to High (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 2
+        },
+        {
+            "page": 2,
+            "response_time_ms": 2
+        }
+    ],
+    "Filter by Category - Popularity (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 2
+        },
+        {
+            "page": 2,
+            "response_time_ms": 8
+        }
+    ],
+    "Filter by Category - Popularity (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 2
+        },
+        {
+            "page": 2,
+            "response_time_ms": 2
+        }
+    ],
+    "Filter by Category - Newest (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 2
+        },
+        {
+            "page": 2,
+            "response_time_ms": 2
+        }
+    ],
+    "Filter by Category - Newest (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 2
+        },
+        {
+            "page": 2,
+            "response_time_ms": 2
+        }
+    ],
+    "Search + Popularity - Simple Search with GIN Index (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 10
+        },
+        {
+            "page": 11,
+            "response_time_ms": 7
+        },
+        {
+            "page": 21,
+            "response_time_ms": 6
+        },
+        {
+            "page": 31,
+            "response_time_ms": 6
+        },
+        {
+            "page": 41,
+            "response_time_ms": 6
+        },
+        {
+            "page": 42,
+            "response_time_ms": 6
+        }
+    ],
+    "Search + Popularity - Simple Search with GIN Index (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 8
+        },
+        {
+            "page": 11,
+            "response_time_ms": 8
+        },
+        {
+            "page": 21,
+            "response_time_ms": 8
+        },
+        {
+            "page": 31,
+            "response_time_ms": 8
+        },
+        {
+            "page": 41,
+            "response_time_ms": 8
+        },
+        {
+            "page": 42,
+            "response_time_ms": 8
+        }
+    ],
+    "Search + Popularity - Full-Text Search (vector search) (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 9
+        },
+        {
+            "page": 11,
+            "response_time_ms": 2
+        },
+        {
+            "page": 21,
+            "response_time_ms": 3
+        },
+        {
+            "page": 31,
+            "response_time_ms": 2
+        },
+        {
+            "page": 40,
+            "response_time_ms": 3
+        }
+    ],
+    "Search + Popularity - Full-Text Search (vector search) (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 8
+        },
+        {
+            "page": 11,
+            "response_time_ms": 5
+        },
+        {
+            "page": 21,
+            "response_time_ms": 4
+        },
+        {
+            "page": 31,
+            "response_time_ms": 4
+        },
+        {
+            "page": 40,
+            "response_time_ms": 4
+        }
+    ]
+}

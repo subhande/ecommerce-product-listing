@@ -73,27 +73,26 @@ def fetch_products(category: str = "", min_price: float = 0.0, max_price: float 
         print(f"Failed to fetch products: {response.text}")
 
 
-def load_csv_and_insert_bulk(path: str):
+def load_csv_and_insert_bulk(path: str, limit: int = 100000):
 
     df = pd.read_csv(path)
-    # df = df[:10000]  # Limit to first 1000 rows for testing, can be removed for full dataset
-    # Select each category and sample 100
-    for category in df["category"].unique():
-        category_df = df[df["category"] == category]
-        if len(category_df) > 100:
-            category_sample = category_df.sample(n=100, random_state=42)
-        else:
-            category_sample = category_df
-        if "sampled_df" in locals():
-            sampled_df = pd.concat([sampled_df, category_sample], ignore_index=True)
-        else:
-            sampled_df = category_sample
-    df = sampled_df.reset_index(drop=True)
+    if limit != -1:
+        for category in df["category"].unique():
+            category_df = df[df["category"] == category]
+            if len(category_df) > (limit // 100):
+                category_sample = category_df.sample(n=limit // 100, random_state=42)
+            else:
+                category_sample = category_df
+            if "sampled_df" in locals():
+                sampled_df = pd.concat([sampled_df, category_sample], ignore_index=True)
+            else:
+                sampled_df = category_sample
+        df = sampled_df.reset_index(drop=True)
 
-    print(f"Total products after sampling: {len(df)}")
+        print(f"Total products after sampling: {len(df)}")
 
-    df = df.sample(n=1000, random_state=42).reset_index(drop=True)
-
+        df = df.sample(n=(limit), random_state=42).reset_index(drop=True)
+    print(f"Loaded CSV with {len(df)} products for insertion")
     # Loop through columns and fill based on dtype
     for col in df.columns:
         if str(col) in ["description", "brand"]:
@@ -143,4 +142,4 @@ if __name__ == "__main__":
     # # Fetch products with filters
     # fetch_products(category="Electronics", min_price=50.0, max_price=500.0)
 
-    load_csv_and_insert_bulk("external-data/processed_amazon_uk_products.csv")
+    load_csv_and_insert_bulk("external-data/processed_amazon_uk_products.csv", limit=1000000)

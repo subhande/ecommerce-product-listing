@@ -50,6 +50,7 @@ func main() {
 	products := v1.Group("/products")
 
 	products.Get("/", handler.GetProducts)
+	products.Get("/counts", handler.GetCounts)
 	products.Post("/", handler.AddProduct)
 	products.Post("/bulk", handler.AddProductsBulk)
 

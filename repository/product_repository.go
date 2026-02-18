@@ -122,16 +122,25 @@ func (r *ProductRepository) GetProducts(
 	productFilter *models.ProductFilter,
 ) ([]models.Product, error) {
 
-	query := `SELECT *
-			  FROM products WHERE 1=1 `
+	productFilter.Normalize()
+
+	query := `SELECT 
+	id, title, asin, description, category, brand, image_url, product_url, price, currency, country, stock, avg_rating, review_count, bought_in_last_month, is_best_seller, created_at, updated_at
+	FROM products WHERE 1=1 `
 
 	args := []interface{}{}
 	argPos := 1
 
-	if productFilter.SearchQueryText != "" {
+	if productFilter.SearchQueryText != "" && productFilter.SearchType == models.SimpleTextSearchType {
 		query += fmt.Sprintf(" AND (title ILIKE $%d OR description ILIKE $%d)", argPos, argPos)
 		searchPattern := "%" + productFilter.SearchQueryText + "%"
 		args = append(args, searchPattern)
+		argPos++
+	}
+
+	if productFilter.SearchQueryText != "" && productFilter.SearchType == models.VectorSearchType {
+		query += fmt.Sprintf(" AND search_vector @@ websearch_to_tsquery('english', $%d)", argPos)
+		args = append(args, productFilter.SearchQueryText)
 		argPos++
 	}
 
@@ -175,11 +184,12 @@ func (r *ProductRepository) GetProducts(
 		argPos++
 	}
 
-	if productFilter.LastID != -1 && productFilter.SortLastValue != "" {
+	if productFilter.LastID != -1 && productFilter.SortLastValue != "" && productFilter.PageNumber == -1 {
 		operator := ">"
 		if productFilter.SortOrder == models.SortOrderDesc {
 			operator = "<"
 		}
+
 		var sortLastValue interface{}
 		var err error
 		switch productFilter.SortByColumn {
@@ -205,15 +215,29 @@ func (r *ProductRepository) GetProducts(
 	if productFilter.SortOrder == models.SortOrderDesc {
 		direction = "DESC"
 	}
-	query += fmt.Sprintf(" ORDER BY %s %s, id %s", productFilter.SortByColumn, direction, direction)
-
+	if productFilter.PageNumber > 0 {
+		query += fmt.Sprintf(" ORDER BY %s %s", productFilter.SortByColumn, direction)
+	} else {
+		query += fmt.Sprintf(" ORDER BY %s %s, id %s", productFilter.SortByColumn, direction, direction)
+	}
 	query += fmt.Sprintf(" LIMIT $%d", argPos)
 	args = append(args, productFilter.PageSize)
+	argPos++
+
+	if productFilter.PageNumber > 0 {
+		offset := (productFilter.PageNumber - 1) * productFilter.PageSize
+		if offset > 0 {
+			query += fmt.Sprintf(" OFFSET $%d", argPos)
+			args = append(args, offset)
+			argPos++
+		}
+	}
 
 	log.Printf("Constructed SQL query: %s", query)
 	log.Printf("With arguments: %v", args)
 
 	rows, err := config.DB.Query(ctx, query, args...)
+
 	if err != nil {
 		return nil, err
 	}
@@ -250,4 +274,79 @@ func (r *ProductRepository) GetProducts(
 	}
 
 	return products, nil
+}
+
+func (r *ProductRepository) GetCounts(
+	ctx context.Context,
+	productFilter *models.ProductFilter,
+) (int64, error) {
+	productFilter.Normalize()
+
+	query := `SELECT COUNT(*) FROM products WHERE 1=1 `
+	args := []interface{}{}
+	argPos := 1
+
+	if productFilter.SearchQueryText != "" && productFilter.SearchType == models.SimpleTextSearchType {
+		query += fmt.Sprintf(" AND (title ILIKE $%d OR description ILIKE $%d)", argPos, argPos)
+		searchPattern := "%" + productFilter.SearchQueryText + "%"
+		args = append(args, searchPattern)
+		argPos++
+	}
+
+	if productFilter.SearchQueryText != "" && productFilter.SearchType == models.VectorSearchType {
+		query += fmt.Sprintf(" AND search_vector @@ websearch_to_tsquery('english', $%d)", argPos)
+		args = append(args, productFilter.SearchQueryText)
+		argPos++
+	}
+
+	if productFilter.Category != "" {
+		query += fmt.Sprintf(" AND category = $%d", argPos)
+		args = append(args, productFilter.Category)
+		argPos++
+	}
+
+	if productFilter.Brand != "" {
+		query += fmt.Sprintf(" AND brand = $%d", argPos)
+		args = append(args, productFilter.Brand)
+		argPos++
+	}
+
+	if productFilter.MinPrice != -1 {
+		query += fmt.Sprintf(" AND price >= $%d", argPos)
+		args = append(args, productFilter.MinPrice)
+		argPos++
+	}
+
+	if productFilter.MaxPrice != -1 {
+		query += fmt.Sprintf(" AND price <= $%d", argPos)
+		args = append(args, productFilter.MaxPrice)
+		argPos++
+	}
+
+	if !productFilter.ShowOutOfStock {
+		query += " AND stock > 0"
+	}
+
+	if productFilter.RatingMoreThanEqual > 0 {
+		query += fmt.Sprintf(" AND avg_rating >= $%d", argPos)
+		args = append(args, productFilter.RatingMoreThanEqual)
+		argPos++
+	}
+
+	if productFilter.ReviewCount > 0 {
+		query += fmt.Sprintf(" AND review_count >= $%d", argPos)
+		args = append(args, productFilter.ReviewCount)
+		argPos++
+	}
+
+	log.Printf("Constructed SQL count query: %s", query)
+	log.Printf("With arguments: %v", args)
+
+	var count int64
+	err := config.DB.QueryRow(ctx, query, args...).Scan(&count)
+	if err != nil {
+		return 0, err
+	}
+
+	return count, nil
 }

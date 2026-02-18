@@ -152,3 +152,32 @@ func (h *ProductHandler) GetProducts(c *fiber.Ctx) error {
 		"products":        products,
 	})
 }
+
+func (h *ProductHandler) GetCounts(c *fiber.Ctx) error {
+
+	productFilter := models.NewProductFilter()
+
+	// productFilter := &models.ProductFilter{}
+
+	// Log incoming query parameters
+	log.Info("Incoming query parameters:", fmt.Sprintf("%v", c.Queries()))
+
+	if err := c.QueryParser(productFilter); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error":         "invalid request body",
+			"error_message": err.Error(),
+		})
+	}
+
+	count, err := h.Service.GetCounts(c.Context(), productFilter)
+	if err != nil {
+		log.Error("Failed to fetch counts:", err)
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": "failed to fetch counts",
+		})
+	}
+
+	return c.JSON(fiber.Map{
+		"count": count,
+	})
+}

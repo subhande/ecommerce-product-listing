@@ -83,27 +83,62 @@ Your repository uses ILIKE with wildcards (e.g., %query%), which makes standard 
 # Result
 
 ### Sort
-
-| Dataset Size                                                         | 1k Products | 10k Products | 100k Products | 1M+ Products |
-| -------------------------------------------------------------------- | ----------- | ------------ | ------------- | ------------ |
-| Popularity [Without Index]                                           | 10ms        | 50ms         | 200ms         | 1s           |
-| Popularity [With Index]                                              | 1ms         | 2ms          | 5ms           | 20ms         |
-| Popularity [With Index Last Page] (Limit Offset Pagination)          | 1ms         | 2ms          | 5ms           | 20ms         |
-| Polularity [With Index First Page] (Keyset Pagination)               | 1ms         | 2ms          | 5ms           | 20ms         |
-| Price (Low to High) [Without Index]                                  | 15ms        | 100ms        | 500ms         | 5s           |
-| Price (Low to High) [With Index]                                     | 1ms         |              | 3ms           | 15ms         |
-| Price (Low to High) [With Index Last Page] (Limit Offset Pagination) | 1ms         | 3ms          | 10ms          | 100ms        |
-| Price (Low to High) [With Index First Page] (Keyset Pagination)      | 1ms         | 3ms          | 10ms          | 15ms         |
-| Rating [Without Index]                                               |             | 20ms         | 150ms         | 700ms        | 10s  |
-| Rating [With Index]                                                  | 1ms         | 3ms          |               | 10ms         | 50ms |
-| Rating [With Index Last Page] (Limit Offset Pagination)              | 1ms         | 3ms          | 10ms          | 100ms        |
-| Rating [With Index First Page] (Keyset Pagination)                   | 1ms         | 3ms          | 10ms          | 15ms         |
-| Newest/Updated [Without Index]                                       | 20ms        | 150ms        | 700ms         | 10s          |
-| Newest/Updated [With Index]                                          | 1ms         | 3ms          | 10ms          | 50ms         |
-| Newest/Updated [With Index Last Page] (Limit Offset Pagination)      | 1ms         | 3ms          | 10ms          | 100ms        |
-| Newest/Updated [With Index First Page] (Keyset Pagination)           | 1ms         | 3ms          | 10ms          | 15ms         |
-
-
+| Query                                              | Type   | Dataset Size | Total Pages | First Page | Last Page | Avg Response Time (ms) | Median Response Time (ms) | P90 Response Time (ms) | P95 Response Time (ms) | P99 Response Time (ms) |
+| -------------------------------------------------- | ------ | ------------ | ----------- | ---------- | --------- | ---------------------- | ------------------------- | ---------------------- | ---------------------- | ---------------------- |
+| Popular Products                                   | Keyset | ~10k         | 199         | 4          | 1         | 2.24                   | 2                         | 2                      | 2                      | 2                      |
+| Popular Products                                   | Keyset | ~100k        | 1981        | 5          | 3         | 3.24                   | 2                         | 2                      | 3                      | 3                      |
+| Popular Products                                   | Keyset | ~1M          | 19804       | 13         | 2         | 4.43                   | 5                         | 3                      | 4                      | 2                      |
+| Popular Products                                   | Offset | ~10k         | 199         | 3          | 4         | 4.95                   | 4                         | 5                      | 4                      | 4                      |
+| Popular Products                                   | Offset | ~100k        | 1981        | 3          | 22        | 15.14                  | 16                        | 20                     | 21                     | 22                     |
+| Popular Products                                   | Offset | ~1M          | 19804       | 10         | 668       | 679.43                 | 1019                      | 625                    | 697                    | 668                    |
+| Price Low to High                                  | Keyset | ~10k         | 199         | 3          | 1         | 2.60                   | 2                         | 2                      | 2                      | 2                      |
+| Price Low to High                                  | Keyset | ~100k        | 1981        | 2          | 2         | 2.52                   | 2                         | 2                      | 2                      | 2                      |
+| Price Low to High                                  | Keyset | ~1M          | 19804       | 8          | 3         | 3.67                   | 3                         | 4                      | 5                      | 3                      |
+| Price Low to High                                  | Offset | ~10k         | 199         | 5          | 6         | 7.05                   | 4                         | 6                      | 6                      | 6                      |
+| Price Low to High                                  | Offset | ~100k        | 1981        | 3          | 52        | 27.71                  | 27                        | 44                     | 49                     | 52                     |
+| Price Low to High                                  | Offset | ~1M          | 19804       | 14         | 3501      | 1669.19                | 1582                      | 3101                   | 4230                   | 3501                   |
+| Rating High to Low                                 | Keyset | ~10k         | 199         | 2          | 2         | 2.13                   | 2                         | 2                      | 2                      | 2                      |
+| Rating High to Low                                 | Keyset | ~100k        | 1981        | 3          | 2         | 2.57                   | 3                         | 3                      | 3                      | 2                      |
+| Rating High to Low                                 | Keyset | ~1M          | 19804       | 6          | 3         | 3.52                   | 3                         | 2                      | 3                      | 3                      |
+| Rating High to Low                                 | Offset | ~10k         | 199         | 3          | 6         | 6.29                   | 4                         | 6                      | 6                      | 6                      |
+| Rating High to Low                                 | Offset | ~100k        | 1981        | 3          | 37        | 28.00                  | 23                        | 37                     | 36                     | 37                     |
+| Rating High to Low                                 | Offset | ~1M          | 19804       | 6          | 1737      | 1128.90                | 1979                      | 1801                   | 1829                   | 1737                   |
+| Recently Updated                                   | Keyset | ~10k         | 199         | 2          | 2         | 2.33                   | 2                         | 2                      | 2                      | 2                      |
+| Recently Updated                                   | Keyset | ~100k        | 1981        | 2          | 3         | 2.57                   | 3                         | 3                      | 2                      | 3                      |
+| Recently Updated                                   | Keyset | ~1M          | 19804       | 9          | 3         | 3.86                   | 3                         | 3                      | 3                      | 3                      |
+| Recently Updated                                   | Offset | ~10k         | 199         | 3          | 5         | 5.14                   | 3                         | 4                      | 4                      | 5                      |
+| Recently Updated                                   | Offset | ~100k        | 1981        | 3          | 19        | 12.00                  | 12                        | 17                     | 17                     | 19                     |
+| Recently Updated                                   | Offset | ~1M          | 19804       | 13         | 421       | 213.14                 | 198                       | 361                    | 361                    | 421                    |
+| Filter by Category - Price Low to High             | Keyset | ~10k         | 1           | 2          | 2         | 2.00                   | 2                         | 2                      | 2                      | 2                      |
+| Filter by Category - Price Low to High             | Keyset | ~100k        | 2           | 2          | 2         | 2.00                   | 2                         | 2                      | 2                      | 2                      |
+| Filter by Category - Price Low to High             | Keyset | ~1M          | 4           | 4          | 2         | 3.00                   | 2                         | 2                      | 2                      | 2                      |
+| Filter by Category - Price Low to High             | Offset | ~10k         | 1           | 2          | 2         | 2.00                   | 2                         | 2                      | 2                      | 2                      |
+| Filter by Category - Price Low to High             | Offset | ~100k        | 2           | 2          | 2         | 2.00                   | 2                         | 2                      | 2                      | 2                      |
+| Filter by Category - Price Low to High             | Offset | ~1M          | 4           | 3          | 2         | 2.50                   | 2                         | 2                      | 2                      | 2                      |
+| Filter by Category - Popularity                    | Keyset | ~10k         | 1           | 2          | 2         | 2.00                   | 2                         | 2                      | 2                      | 2                      |
+| Filter by Category - Popularity                    | Keyset | ~100k        | 2           | 2          | 8         | 5.00                   | 8                         | 8                      | 8                      | 8                      |
+| Filter by Category - Popularity                    | Keyset | ~1M          | 4           | 3          | 71        | 37.00                  | 71                        | 71                     | 71                     | 71                     |
+| Filter by Category - Popularity                    | Offset | ~10k         | 1           | 2          | 2         | 2.00                   | 2                         | 2                      | 2                      | 2                      |
+| Filter by Category - Popularity                    | Offset | ~100k        | 2           | 2          | 2         | 2.00                   | 2                         | 2                      | 2                      | 2                      |
+| Filter by Category - Popularity                    | Offset | ~1M          | 4           | 4          | 4         | 4.00                   | 4                         | 4                      | 4                      | 4                      |
+| Filter by Category - Newest                        | Keyset | ~10k         | 1           | 2          | 2         | 2.00                   | 2                         | 2                      | 2                      | 2                      |
+| Filter by Category - Newest                        | Keyset | ~100k        | 2           | 2          | 2         | 2.00                   | 2                         | 2                      | 2                      | 2                      |
+| Filter by Category - Newest                        | Keyset | ~1M          | 4           | 3          | 2         | 2.50                   | 2                         | 2                      | 2                      | 2                      |
+| Filter by Category - Newest                        | Offset | ~10k         | 1           | 2          | 2         | 2.00                   | 2                         | 2                      | 2                      | 2                      |
+| Filter by Category - Newest                        | Offset | ~100k        | 2           | 2          | 2         | 2.00                   | 2                         | 2                      | 2                      | 2                      |
+| Filter by Category - Newest                        | Offset | ~1M          | 4           | 2          | 2         | 2.00                   | 2                         | 2                      | 2                      | 2                      |
+| Search + Popularity - Simple Search with GIN Index | Keyset | ~10k         | 4           | 23         | 5         | 13.50                  | 10                        | 5                      | 5                      | 5                      |
+| Search + Popularity - Simple Search with GIN Index | Keyset | ~100k        | 42          | 10         | 6         | 6.83                   | 6                         | 6                      | 6                      | 6                      |
+| Search + Popularity - Simple Search with GIN Index | Keyset | ~1M          | 441         | 229        | 5         | 12.84                  | 6                         | 8                      | 9                      | 5                      |
+| Search + Popularity - Simple Search with GIN Index | Offset | ~10k         | 4           | 19         | 19        | 19.00                  | 19                        | 19                     | 19                     | 19                     |
+| Search + Popularity - Simple Search with GIN Index | Offset | ~100k        | 42          | 8          | 8         | 8.00                   | 8                         | 8                      | 8                      | 8                      |
+| Search + Popularity - Simple Search with GIN Index | Offset | ~1M          | 441         | 207        | 83        | 108.38                 | 96                        | 89                     | 84                     | 83                     |
+| Search + Popularity - Full-Text Search             | vector | ~10k         | 4           | 5          | 3         | 3.75                   | 3                         | 3                      | 3                      | 3                      |
+| Search + Popularity - Full-Text Search             | vector | ~100k        | 40          | 9          | 3         | 3.80                   | 3                         | 3                      | 3                      | 3                      |
+| Search + Popularity - Full-Text Search             | vector | ~1M          | 413         | 158        | 6         | 9.12                   | 10                        | 6                      | 3                      | 6                      |
+| Search + Popularity - Full-Text Search             | vector | ~10k         | 4           | 4          | 4         | 4.00                   | 4                         | 4                      | 4                      | 4                      |
+| Search + Popularity - Full-Text Search             | vector | ~100k        | 40          | 8          | 4         | 5.00                   | 4                         | 4                      | 4                      | 4                      |
+| Search + Popularity - Full-Text Search             | vector | ~1M          | 413         | 134        | 84        | 100.79                 | 76                        | 89                     | 76                     | 84                     |
 
 ## Filter
 

@@ -50,20 +50,34 @@ func (o SortOrderEnum) IsValid() bool {
 	return o == SortOrderAsc || o == SortOrderDesc
 }
 
+type SearchTypeEnum string
+
+const (
+	SimpleTextSearchType   SearchTypeEnum = "simple"        // ilike
+	VectorSearchType       SearchTypeEnum = "fts"           // full-text search using search_vector and websearch_to_tsquery
+	SearchEngineSearchType SearchTypeEnum = "search_engine" // PG_TextSearch with ranking and highlighting (not implemented yet)
+)
+
+func (s SearchTypeEnum) IsValidSearchType() bool {
+	return s == SimpleTextSearchType || s == VectorSearchType || s == SearchEngineSearchType
+}
+
 type ProductFilter struct {
-	SearchQueryText     string        `query:"search_query_text,omitempty"`
-	Category            string        `query:"category,omitempty"`
-	Brand               string        `query:"brand,omitempty"`
-	MinPrice            float64       `query:"min_price,omitempty"`
-	MaxPrice            float64       `query:"max_price,omitempty"`
-	ShowOutOfStock      bool          `query:"show_out_of_stock,omitempty"`
-	RatingMoreThanEqual float64       `query:"rating_more_than_equal,omitempty"`
-	ReviewCount         int           `query:"review_count,omitempty"`
-	SortByColumn        SortByEnum    `query:"sort_by_column,omitempty"`
-	SortOrder           SortOrderEnum `query:"sort_order,omitempty"`
-	SortLastValue       string        `query:"sort_last_value,omitempty"`
-	LastID              int           `query:"last_id,omitempty"`
-	PageSize            int           `query:"page_size,omitempty"`
+	SearchQueryText     string         `query:"search_query_text,omitempty"`
+	SearchType          SearchTypeEnum `query:"search_type,omitempty"` // true for vector search, false for ILIKE search
+	Category            string         `query:"category,omitempty"`
+	Brand               string         `query:"brand,omitempty"`
+	MinPrice            float64        `query:"min_price,omitempty"`
+	MaxPrice            float64        `query:"max_price,omitempty"`
+	ShowOutOfStock      bool           `query:"show_out_of_stock,omitempty"`
+	RatingMoreThanEqual float64        `query:"rating_more_than_equal,omitempty"`
+	ReviewCount         int            `query:"review_count,omitempty"`
+	SortByColumn        SortByEnum     `query:"sort_by_column,omitempty"`
+	SortOrder           SortOrderEnum  `query:"sort_order,omitempty"`
+	SortLastValue       string         `query:"sort_last_value,omitempty"`
+	LastID              int            `query:"last_id,omitempty"`
+	PageSize            int            `query:"page_size,omitempty"`
+	PageNumber          int            `query:"page_number,omitempty"`
 }
 
 func (f *ProductFilter) Normalize() {
@@ -81,6 +95,9 @@ func (f *ProductFilter) Normalize() {
 	if !f.SortOrder.IsValid() {
 		f.SortOrder = SortOrderDesc
 	}
+	if !f.SearchType.IsValidSearchType() {
+		f.SearchType = SimpleTextSearchType
+	}
 }
 
 const (
@@ -94,10 +111,13 @@ const (
 	DefaultReviewCount         = -1
 	DefaultShowOutOfStock      = false
 	DefaultRatingMoreThanEqual = -1
+	DefaultPageNumber          = -1
+	DefaultSearchType          = SimpleTextSearchType
 )
 
 func NewProductFilter() *ProductFilter {
 	return &ProductFilter{
+		PageNumber:          DefaultPageNumber,
 		PageSize:            DefaultPageSize,
 		MinPrice:            DefaultMinPrice,
 		MaxPrice:            DefaultMaxPrice,
@@ -107,5 +127,6 @@ func NewProductFilter() *ProductFilter {
 		ReviewCount:         DefaultReviewCount,
 		ShowOutOfStock:      DefaultShowOutOfStock,
 		RatingMoreThanEqual: DefaultRatingMoreThanEqual,
+		SearchType:          DefaultSearchType,
 	}
 }

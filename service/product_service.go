@@ -33,3 +33,7 @@ func (s *ProductService) ListProducts(
 
 	return s.Repo.GetProducts(ctx, prodcutFilter)
 }
+
+func (s *ProductService) GetCounts(ctx context.Context, productFilter *models.ProductFilter) (int64, error) {
+	return s.Repo.GetCounts(ctx, productFilter)
+}

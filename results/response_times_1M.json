@@ -1,0 +1,1462 @@
+{
+    "Popular Products (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 13
+        },
+        {
+            "page": 1001,
+            "response_time_ms": 6
+        },
+        {
+            "page": 2001,
+            "response_time_ms": 9
+        },
+        {
+            "page": 3001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 4001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 5001,
+            "response_time_ms": 6
+        },
+        {
+            "page": 6001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 7001,
+            "response_time_ms": 2
+        },
+        {
+            "page": 8001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 9001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 10001,
+            "response_time_ms": 5
+        },
+        {
+            "page": 11001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 12001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 13001,
+            "response_time_ms": 7
+        },
+        {
+            "page": 14001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 15001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 16001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 17001,
+            "response_time_ms": 2
+        },
+        {
+            "page": 18001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 19001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 19804,
+            "response_time_ms": 2
+        }
+    ],
+    "Popular Products (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 10
+        },
+        {
+            "page": 1001,
+            "response_time_ms": 2090
+        },
+        {
+            "page": 2001,
+            "response_time_ms": 677
+        },
+        {
+            "page": 3001,
+            "response_time_ms": 362
+        },
+        {
+            "page": 4001,
+            "response_time_ms": 456
+        },
+        {
+            "page": 5001,
+            "response_time_ms": 417
+        },
+        {
+            "page": 6001,
+            "response_time_ms": 416
+        },
+        {
+            "page": 7001,
+            "response_time_ms": 728
+        },
+        {
+            "page": 8001,
+            "response_time_ms": 661
+        },
+        {
+            "page": 9001,
+            "response_time_ms": 619
+        },
+        {
+            "page": 10001,
+            "response_time_ms": 1019
+        },
+        {
+            "page": 11001,
+            "response_time_ms": 795
+        },
+        {
+            "page": 12001,
+            "response_time_ms": 718
+        },
+        {
+            "page": 13001,
+            "response_time_ms": 738
+        },
+        {
+            "page": 14001,
+            "response_time_ms": 663
+        },
+        {
+            "page": 15001,
+            "response_time_ms": 644
+        },
+        {
+            "page": 16001,
+            "response_time_ms": 626
+        },
+        {
+            "page": 17001,
+            "response_time_ms": 639
+        },
+        {
+            "page": 18001,
+            "response_time_ms": 625
+        },
+        {
+            "page": 19001,
+            "response_time_ms": 697
+        },
+        {
+            "page": 19804,
+            "response_time_ms": 668
+        }
+    ],
+    "Price Low to High (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 8
+        },
+        {
+            "page": 1001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 2001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 3001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 4001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 5001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 6001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 7001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 8001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 9001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 10001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 11001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 12001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 13001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 14001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 15001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 16001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 17001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 18001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 19001,
+            "response_time_ms": 5
+        },
+        {
+            "page": 19804,
+            "response_time_ms": 3
+        }
+    ],
+    "Price Low to High (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 14
+        },
+        {
+            "page": 1001,
+            "response_time_ms": 383
+        },
+        {
+            "page": 2001,
+            "response_time_ms": 362
+        },
+        {
+            "page": 3001,
+            "response_time_ms": 500
+        },
+        {
+            "page": 4001,
+            "response_time_ms": 657
+        },
+        {
+            "page": 5001,
+            "response_time_ms": 851
+        },
+        {
+            "page": 6001,
+            "response_time_ms": 948
+        },
+        {
+            "page": 7001,
+            "response_time_ms": 1217
+        },
+        {
+            "page": 8001,
+            "response_time_ms": 1216
+        },
+        {
+            "page": 9001,
+            "response_time_ms": 1401
+        },
+        {
+            "page": 10001,
+            "response_time_ms": 1582
+        },
+        {
+            "page": 11001,
+            "response_time_ms": 1706
+        },
+        {
+            "page": 12001,
+            "response_time_ms": 1834
+        },
+        {
+            "page": 13001,
+            "response_time_ms": 1986
+        },
+        {
+            "page": 14001,
+            "response_time_ms": 2124
+        },
+        {
+            "page": 15001,
+            "response_time_ms": 2296
+        },
+        {
+            "page": 16001,
+            "response_time_ms": 2482
+        },
+        {
+            "page": 17001,
+            "response_time_ms": 2662
+        },
+        {
+            "page": 18001,
+            "response_time_ms": 3101
+        },
+        {
+            "page": 19001,
+            "response_time_ms": 4230
+        },
+        {
+            "page": 19804,
+            "response_time_ms": 3501
+        }
+    ],
+    "Rating High to Low (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 6
+        },
+        {
+            "page": 1001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 2001,
+            "response_time_ms": 5
+        },
+        {
+            "page": 3001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 4001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 5001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 6001,
+            "response_time_ms": 2
+        },
+        {
+            "page": 7001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 8001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 9001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 10001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 11001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 12001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 13001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 14001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 15001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 16001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 17001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 18001,
+            "response_time_ms": 2
+        },
+        {
+            "page": 19001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 19804,
+            "response_time_ms": 3
+        }
+    ],
+    "Rating High to Low (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 6
+        },
+        {
+            "page": 1001,
+            "response_time_ms": 166
+        },
+        {
+            "page": 2001,
+            "response_time_ms": 288
+        },
+        {
+            "page": 3001,
+            "response_time_ms": 377
+        },
+        {
+            "page": 4001,
+            "response_time_ms": 480
+        },
+        {
+            "page": 5001,
+            "response_time_ms": 744
+        },
+        {
+            "page": 6001,
+            "response_time_ms": 697
+        },
+        {
+            "page": 7001,
+            "response_time_ms": 799
+        },
+        {
+            "page": 8001,
+            "response_time_ms": 885
+        },
+        {
+            "page": 9001,
+            "response_time_ms": 992
+        },
+        {
+            "page": 10001,
+            "response_time_ms": 1979
+        },
+        {
+            "page": 11001,
+            "response_time_ms": 1296
+        },
+        {
+            "page": 12001,
+            "response_time_ms": 1375
+        },
+        {
+            "page": 13001,
+            "response_time_ms": 1497
+        },
+        {
+            "page": 14001,
+            "response_time_ms": 1782
+        },
+        {
+            "page": 15001,
+            "response_time_ms": 1593
+        },
+        {
+            "page": 16001,
+            "response_time_ms": 1669
+        },
+        {
+            "page": 17001,
+            "response_time_ms": 1715
+        },
+        {
+            "page": 18001,
+            "response_time_ms": 1801
+        },
+        {
+            "page": 19001,
+            "response_time_ms": 1829
+        },
+        {
+            "page": 19804,
+            "response_time_ms": 1737
+        }
+    ],
+    "Recently Updated (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 9
+        },
+        {
+            "page": 1001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 2001,
+            "response_time_ms": 2
+        },
+        {
+            "page": 3001,
+            "response_time_ms": 2
+        },
+        {
+            "page": 4001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 5001,
+            "response_time_ms": 2
+        },
+        {
+            "page": 6001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 7001,
+            "response_time_ms": 4
+        },
+        {
+            "page": 8001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 9001,
+            "response_time_ms": 2
+        },
+        {
+            "page": 10001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 11001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 12001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 13001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 14001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 15001,
+            "response_time_ms": 16
+        },
+        {
+            "page": 16001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 17001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 18001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 19001,
+            "response_time_ms": 3
+        },
+        {
+            "page": 19804,
+            "response_time_ms": 3
+        }
+    ],
+    "Recently Updated (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 13
+        },
+        {
+            "page": 1001,
+            "response_time_ms": 36
+        },
+        {
+            "page": 2001,
+            "response_time_ms": 43
+        },
+        {
+            "page": 3001,
+            "response_time_ms": 53
+        },
+        {
+            "page": 4001,
+            "response_time_ms": 58
+        },
+        {
+            "page": 5001,
+            "response_time_ms": 66
+        },
+        {
+            "page": 6001,
+            "response_time_ms": 93
+        },
+        {
+            "page": 7001,
+            "response_time_ms": 214
+        },
+        {
+            "page": 8001,
+            "response_time_ms": 171
+        },
+        {
+            "page": 9001,
+            "response_time_ms": 175
+        },
+        {
+            "page": 10001,
+            "response_time_ms": 198
+        },
+        {
+            "page": 11001,
+            "response_time_ms": 221
+        },
+        {
+            "page": 12001,
+            "response_time_ms": 434
+        },
+        {
+            "page": 13001,
+            "response_time_ms": 264
+        },
+        {
+            "page": 14001,
+            "response_time_ms": 294
+        },
+        {
+            "page": 15001,
+            "response_time_ms": 326
+        },
+        {
+            "page": 16001,
+            "response_time_ms": 353
+        },
+        {
+            "page": 17001,
+            "response_time_ms": 321
+        },
+        {
+            "page": 18001,
+            "response_time_ms": 361
+        },
+        {
+            "page": 19001,
+            "response_time_ms": 361
+        },
+        {
+            "page": 19804,
+            "response_time_ms": 421
+        }
+    ],
+    "Filter by Category - Price Low to High (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 4
+        },
+        {
+            "page": 4,
+            "response_time_ms": 2
+        }
+    ],
+    "Filter by Category - Price Low to High (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 3
+        },
+        {
+            "page": 4,
+            "response_time_ms": 2
+        }
+    ],
+    "Filter by Category - Popularity (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 3
+        },
+        {
+            "page": 4,
+            "response_time_ms": 71
+        }
+    ],
+    "Filter by Category - Popularity (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 4
+        },
+        {
+            "page": 4,
+            "response_time_ms": 4
+        }
+    ],
+    "Filter by Category - Newest (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 3
+        },
+        {
+            "page": 4,
+            "response_time_ms": 2
+        }
+    ],
+    "Filter by Category - Newest (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 2
+        },
+        {
+            "page": 4,
+            "response_time_ms": 2
+        }
+    ],
+    "Search + Popularity - Simple Search with GIN Index (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 229
+        },
+        {
+            "page": 11,
+            "response_time_ms": 7
+        },
+        {
+            "page": 21,
+            "response_time_ms": 7
+        },
+        {
+            "page": 31,
+            "response_time_ms": 7
+        },
+        {
+            "page": 41,
+            "response_time_ms": 8
+        },
+        {
+            "page": 51,
+            "response_time_ms": 8
+        },
+        {
+            "page": 61,
+            "response_time_ms": 5
+        },
+        {
+            "page": 71,
+            "response_time_ms": 42
+        },
+        {
+            "page": 81,
+            "response_time_ms": 7
+        },
+        {
+            "page": 91,
+            "response_time_ms": 7
+        },
+        {
+            "page": 101,
+            "response_time_ms": 7
+        },
+        {
+            "page": 111,
+            "response_time_ms": 7
+        },
+        {
+            "page": 121,
+            "response_time_ms": 8
+        },
+        {
+            "page": 131,
+            "response_time_ms": 6
+        },
+        {
+            "page": 141,
+            "response_time_ms": 6
+        },
+        {
+            "page": 151,
+            "response_time_ms": 7
+        },
+        {
+            "page": 161,
+            "response_time_ms": 9
+        },
+        {
+            "page": 171,
+            "response_time_ms": 9
+        },
+        {
+            "page": 181,
+            "response_time_ms": 8
+        },
+        {
+            "page": 191,
+            "response_time_ms": 8
+        },
+        {
+            "page": 201,
+            "response_time_ms": 8
+        },
+        {
+            "page": 211,
+            "response_time_ms": 7
+        },
+        {
+            "page": 221,
+            "response_time_ms": 6
+        },
+        {
+            "page": 231,
+            "response_time_ms": 7
+        },
+        {
+            "page": 241,
+            "response_time_ms": 8
+        },
+        {
+            "page": 251,
+            "response_time_ms": 7
+        },
+        {
+            "page": 261,
+            "response_time_ms": 7
+        },
+        {
+            "page": 271,
+            "response_time_ms": 6
+        },
+        {
+            "page": 281,
+            "response_time_ms": 7
+        },
+        {
+            "page": 291,
+            "response_time_ms": 7
+        },
+        {
+            "page": 301,
+            "response_time_ms": 9
+        },
+        {
+            "page": 311,
+            "response_time_ms": 6
+        },
+        {
+            "page": 321,
+            "response_time_ms": 7
+        },
+        {
+            "page": 331,
+            "response_time_ms": 6
+        },
+        {
+            "page": 341,
+            "response_time_ms": 5
+        },
+        {
+            "page": 351,
+            "response_time_ms": 7
+        },
+        {
+            "page": 361,
+            "response_time_ms": 6
+        },
+        {
+            "page": 371,
+            "response_time_ms": 7
+        },
+        {
+            "page": 381,
+            "response_time_ms": 7
+        },
+        {
+            "page": 391,
+            "response_time_ms": 8
+        },
+        {
+            "page": 401,
+            "response_time_ms": 8
+        },
+        {
+            "page": 411,
+            "response_time_ms": 8
+        },
+        {
+            "page": 421,
+            "response_time_ms": 9
+        },
+        {
+            "page": 431,
+            "response_time_ms": 8
+        },
+        {
+            "page": 441,
+            "response_time_ms": 5
+        }
+    ],
+    "Search + Popularity - Simple Search with GIN Index (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 207
+        },
+        {
+            "page": 11,
+            "response_time_ms": 566
+        },
+        {
+            "page": 21,
+            "response_time_ms": 520
+        },
+        {
+            "page": 31,
+            "response_time_ms": 69
+        },
+        {
+            "page": 41,
+            "response_time_ms": 72
+        },
+        {
+            "page": 51,
+            "response_time_ms": 73
+        },
+        {
+            "page": 61,
+            "response_time_ms": 74
+        },
+        {
+            "page": 71,
+            "response_time_ms": 76
+        },
+        {
+            "page": 81,
+            "response_time_ms": 74
+        },
+        {
+            "page": 91,
+            "response_time_ms": 73
+        },
+        {
+            "page": 101,
+            "response_time_ms": 77
+        },
+        {
+            "page": 111,
+            "response_time_ms": 73
+        },
+        {
+            "page": 121,
+            "response_time_ms": 72
+        },
+        {
+            "page": 131,
+            "response_time_ms": 90
+        },
+        {
+            "page": 141,
+            "response_time_ms": 82
+        },
+        {
+            "page": 151,
+            "response_time_ms": 79
+        },
+        {
+            "page": 161,
+            "response_time_ms": 97
+        },
+        {
+            "page": 171,
+            "response_time_ms": 87
+        },
+        {
+            "page": 181,
+            "response_time_ms": 83
+        },
+        {
+            "page": 191,
+            "response_time_ms": 86
+        },
+        {
+            "page": 201,
+            "response_time_ms": 86
+        },
+        {
+            "page": 211,
+            "response_time_ms": 97
+        },
+        {
+            "page": 221,
+            "response_time_ms": 96
+        },
+        {
+            "page": 231,
+            "response_time_ms": 90
+        },
+        {
+            "page": 241,
+            "response_time_ms": 94
+        },
+        {
+            "page": 251,
+            "response_time_ms": 93
+        },
+        {
+            "page": 261,
+            "response_time_ms": 83
+        },
+        {
+            "page": 271,
+            "response_time_ms": 86
+        },
+        {
+            "page": 281,
+            "response_time_ms": 93
+        },
+        {
+            "page": 291,
+            "response_time_ms": 86
+        },
+        {
+            "page": 301,
+            "response_time_ms": 95
+        },
+        {
+            "page": 311,
+            "response_time_ms": 93
+        },
+        {
+            "page": 321,
+            "response_time_ms": 86
+        },
+        {
+            "page": 331,
+            "response_time_ms": 85
+        },
+        {
+            "page": 341,
+            "response_time_ms": 91
+        },
+        {
+            "page": 351,
+            "response_time_ms": 94
+        },
+        {
+            "page": 361,
+            "response_time_ms": 105
+        },
+        {
+            "page": 371,
+            "response_time_ms": 82
+        },
+        {
+            "page": 381,
+            "response_time_ms": 86
+        },
+        {
+            "page": 391,
+            "response_time_ms": 91
+        },
+        {
+            "page": 401,
+            "response_time_ms": 89
+        },
+        {
+            "page": 411,
+            "response_time_ms": 88
+        },
+        {
+            "page": 421,
+            "response_time_ms": 84
+        },
+        {
+            "page": 431,
+            "response_time_ms": 91
+        },
+        {
+            "page": 441,
+            "response_time_ms": 83
+        }
+    ],
+    "Search + Popularity - Full-Text Search (vector search) (Keyset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 158
+        },
+        {
+            "page": 11,
+            "response_time_ms": 3
+        },
+        {
+            "page": 21,
+            "response_time_ms": 3
+        },
+        {
+            "page": 31,
+            "response_time_ms": 3
+        },
+        {
+            "page": 41,
+            "response_time_ms": 4
+        },
+        {
+            "page": 51,
+            "response_time_ms": 4
+        },
+        {
+            "page": 61,
+            "response_time_ms": 5
+        },
+        {
+            "page": 71,
+            "response_time_ms": 4
+        },
+        {
+            "page": 81,
+            "response_time_ms": 4
+        },
+        {
+            "page": 91,
+            "response_time_ms": 4
+        },
+        {
+            "page": 101,
+            "response_time_ms": 5
+        },
+        {
+            "page": 111,
+            "response_time_ms": 9
+        },
+        {
+            "page": 121,
+            "response_time_ms": 6
+        },
+        {
+            "page": 131,
+            "response_time_ms": 6
+        },
+        {
+            "page": 141,
+            "response_time_ms": 8
+        },
+        {
+            "page": 151,
+            "response_time_ms": 9
+        },
+        {
+            "page": 161,
+            "response_time_ms": 8
+        },
+        {
+            "page": 171,
+            "response_time_ms": 4
+        },
+        {
+            "page": 181,
+            "response_time_ms": 3
+        },
+        {
+            "page": 191,
+            "response_time_ms": 4
+        },
+        {
+            "page": 201,
+            "response_time_ms": 6
+        },
+        {
+            "page": 211,
+            "response_time_ms": 10
+        },
+        {
+            "page": 221,
+            "response_time_ms": 7
+        },
+        {
+            "page": 231,
+            "response_time_ms": 7
+        },
+        {
+            "page": 241,
+            "response_time_ms": 4
+        },
+        {
+            "page": 251,
+            "response_time_ms": 5
+        },
+        {
+            "page": 261,
+            "response_time_ms": 4
+        },
+        {
+            "page": 271,
+            "response_time_ms": 4
+        },
+        {
+            "page": 281,
+            "response_time_ms": 6
+        },
+        {
+            "page": 291,
+            "response_time_ms": 9
+        },
+        {
+            "page": 301,
+            "response_time_ms": 9
+        },
+        {
+            "page": 311,
+            "response_time_ms": 7
+        },
+        {
+            "page": 321,
+            "response_time_ms": 8
+        },
+        {
+            "page": 331,
+            "response_time_ms": 7
+        },
+        {
+            "page": 341,
+            "response_time_ms": 3
+        },
+        {
+            "page": 351,
+            "response_time_ms": 5
+        },
+        {
+            "page": 361,
+            "response_time_ms": 5
+        },
+        {
+            "page": 371,
+            "response_time_ms": 8
+        },
+        {
+            "page": 381,
+            "response_time_ms": 6
+        },
+        {
+            "page": 391,
+            "response_time_ms": 4
+        },
+        {
+            "page": 401,
+            "response_time_ms": 3
+        },
+        {
+            "page": 411,
+            "response_time_ms": 5
+        },
+        {
+            "page": 413,
+            "response_time_ms": 6
+        }
+    ],
+    "Search + Popularity - Full-Text Search (vector search) (Offset Pagination)": [
+        {
+            "page": 1,
+            "response_time_ms": 134
+        },
+        {
+            "page": 11,
+            "response_time_ms": 307
+        },
+        {
+            "page": 21,
+            "response_time_ms": 351
+        },
+        {
+            "page": 31,
+            "response_time_ms": 334
+        },
+        {
+            "page": 41,
+            "response_time_ms": 335
+        },
+        {
+            "page": 51,
+            "response_time_ms": 335
+        },
+        {
+            "page": 61,
+            "response_time_ms": 50
+        },
+        {
+            "page": 71,
+            "response_time_ms": 59
+        },
+        {
+            "page": 81,
+            "response_time_ms": 50
+        },
+        {
+            "page": 91,
+            "response_time_ms": 59
+        },
+        {
+            "page": 101,
+            "response_time_ms": 56
+        },
+        {
+            "page": 111,
+            "response_time_ms": 53
+        },
+        {
+            "page": 121,
+            "response_time_ms": 55
+        },
+        {
+            "page": 131,
+            "response_time_ms": 56
+        },
+        {
+            "page": 141,
+            "response_time_ms": 56
+        },
+        {
+            "page": 151,
+            "response_time_ms": 54
+        },
+        {
+            "page": 161,
+            "response_time_ms": 68
+        },
+        {
+            "page": 171,
+            "response_time_ms": 71
+        },
+        {
+            "page": 181,
+            "response_time_ms": 70
+        },
+        {
+            "page": 191,
+            "response_time_ms": 72
+        },
+        {
+            "page": 201,
+            "response_time_ms": 66
+        },
+        {
+            "page": 211,
+            "response_time_ms": 76
+        },
+        {
+            "page": 221,
+            "response_time_ms": 78
+        },
+        {
+            "page": 231,
+            "response_time_ms": 69
+        },
+        {
+            "page": 241,
+            "response_time_ms": 71
+        },
+        {
+            "page": 251,
+            "response_time_ms": 71
+        },
+        {
+            "page": 261,
+            "response_time_ms": 76
+        },
+        {
+            "page": 271,
+            "response_time_ms": 69
+        },
+        {
+            "page": 281,
+            "response_time_ms": 73
+        },
+        {
+            "page": 291,
+            "response_time_ms": 70
+        },
+        {
+            "page": 301,
+            "response_time_ms": 66
+        },
+        {
+            "page": 311,
+            "response_time_ms": 63
+        },
+        {
+            "page": 321,
+            "response_time_ms": 66
+        },
+        {
+            "page": 331,
+            "response_time_ms": 67
+        },
+        {
+            "page": 341,
+            "response_time_ms": 78
+        },
+        {
+            "page": 351,
+            "response_time_ms": 76
+        },
+        {
+            "page": 361,
+            "response_time_ms": 75
+        },
+        {
+            "page": 371,
+            "response_time_ms": 69
+        },
+        {
+            "page": 381,
+            "response_time_ms": 89
+        },
+        {
+            "page": 391,
+            "response_time_ms": 71
+        },
+        {
+            "page": 401,
+            "response_time_ms": 76
+        },
+        {
+            "page": 411,
+            "response_time_ms": 110
+        },
+        {
+            "page": 413,
+            "response_time_ms": 84
+        }
+    ]
+}
