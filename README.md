@@ -15,7 +15,7 @@
 - [x] Benchmarking with different dataset sizes (10k, 100k, 1M products)
 - [x] Compare Keyset Pagination vs Offset Pagination
 - [ ] Load Test on 10k, 100k, 1M products
-- [ ] Read Replicas for scaling reads
+- [x] Read Replicas for scaling reads
 - [ ] Caching with Redis for popular queries
 - [ ] ElasticSearch for full-text search and complex filtering
 
