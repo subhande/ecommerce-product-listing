@@ -8,13 +8,13 @@ import (
 func Initialize() {
 	var err error
 
-	// // Drop table if exists (for testing purposes)
-	// _, err = DB.Exec(context.Background(), `DROP TABLE IF EXISTS products`)
-	// if err != nil {
-	// 	log.Println("Error dropping products table:", err)
-	// } else {
-	// 	log.Println("Products table dropped if it existed")
-	// }
+	// Drop table if exists (for testing purposes)
+	_, err = DB.Exec(context.Background(), `DROP TABLE IF EXISTS products`)
+	if err != nil {
+		log.Println("Error dropping products table:", err)
+	} else {
+		log.Println("Products table dropped if it existed")
+	}
 
 	// Check if products table exists, if not create it and add indexes
 	var exists bool
@@ -135,6 +135,20 @@ func Initialize() {
 		} else {
 			log.Println("Executed query successfully")
 		}
+	}
+
+	// Insert dummy data for testing
+	_, err = DB.Exec(context.Background(), `
+	INSERT INTO products (title, asin, description, category, brand, image_url, product_url, price, currency, country, stock, avg_rating, review_count, bought_in_last_month)
+	VALUES 
+	('Sample Product 1', 'ASIN001', 'Description for product 1', 'Electronics', 'BrandA', 'http://example.com/image1.jpg', 'http://example.com/product1', 99.99, 'USD', 'USA', 10, 4.5, 100, 50),
+	('Sample Product 2', 'ASIN002', 'Description for product 2', 'Books', 'BrandB', 'http://example.com/image2.jpg', 'http://example.com/product2', 19.99, 'USD', 'USA', 0, 4.0, 50, 20),
+	('Sample Product 3', 'ASIN003', 'Description for product 3', 'Clothing', 'BrandC', 'http://example.com/image3.jpg', 'http://example.com/product3', 49.99, 'USD', 'USA', 5, 3.5, 30, 10)
+	`)
+	if err != nil {
+		log.Println("Error inserting dummy data:", err)
+	} else {
+		log.Println("Dummy data inserted successfully")
 	}
 
 }

@@ -142,4 +142,4 @@ if __name__ == "__main__":
     # # Fetch products with filters
     # fetch_products(category="Electronics", min_price=50.0, max_price=500.0)
 
-    load_csv_and_insert_bulk("external-data/processed_amazon_uk_products.csv", limit=1000000)
+    load_csv_and_insert_bulk("external-data/processed_amazon_uk_products.csv", limit=1000)
