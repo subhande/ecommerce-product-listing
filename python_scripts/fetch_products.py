@@ -17,14 +17,14 @@ FETCH_API = f"{BASE_URL}"
 
 COUNT_API = f"{BASE_URL}/counts"
 
-# dataset_size = 10000
-# dataset_len = "10k"
+dataset_size = 10000
+dataset_len = "10k"
 
 # dataset_size = 100000
 # dataset_len = "100k"
 
-dataset_size = 1000000
-dataset_len = "1M"
+# dataset_size = 1000000
+# dataset_len = "1M"
 
 
 PATH = f"results/response_times_{dataset_len}.json"
@@ -287,7 +287,12 @@ if __name__ == "__main__":
             print(f"Query: {name} Page: {page_no}: {end - start:.4f} seconds")
             if limit_offset_pagination:
                 response_times[name].append({"page": page_no, "response_time_ms": round((end - start) * 1000)})
-            elif not limit_offset_pagination and page_no == 1 or page_no % page_snapshot_interval == 1 or page_no == total_pages:
+            elif (
+                not limit_offset_pagination
+                and page_no == 1
+                or page_no % page_snapshot_interval == 1
+                or page_no == total_pages
+            ):
                 response_times[name].append({"page": page_no, "response_time_ms": round((end - start) * 1000)})
             if limit_offset_pagination and page_no >= total_pages:
                 break  # Stop if we've fetched all pages for offset pagination

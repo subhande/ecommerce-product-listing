@@ -15,7 +15,33 @@ POSTGRES_DB="${POSTGRES_DB:-ecommerce}"
 REPLICATION_USER="${REPLICATION_USER:-replicator}"
 REPLICATION_PASSWORD="${REPLICATION_PASSWORD:-replicator_pass}"
 REPLICA_DATA_DIR="${REPLICA_DATA_DIR:-postgres-replica-data}"
+SYNC_STATE="${SYNC_STATE:-async}"
 PRIMARY_DATA_DIR_IN_CONTAINER="/var/lib/postgresql/18/docker"
+
+if [ -n "${SYNC_STATE}" ]; then
+  SYNC_STATE="$(printf '%s' "${SYNC_STATE}" | tr '[:upper:]' '[:lower:]')"
+  case "${SYNC_STATE}" in
+    async|sync|potential|quorum) ;;
+    *)
+      echo "Invalid SYNC_STATE='${SYNC_STATE}'. Allowed: async, sync, potential, quorum." >&2
+      exit 1
+      ;;
+  esac
+fi
+
+wait_for_postgres() {
+  local container="$1"
+  local retries=60
+  local i
+  for ((i = 1; i <= retries; i++)); do
+    if docker exec "${container}" pg_isready -U "${POSTGRES_USER}" >/dev/null 2>&1; then
+      return 0
+    fi
+    sleep 1
+  done
+  echo "Postgres in container '${container}' did not become ready in time." >&2
+  return 1
+}
 
 echo "Preparing replica data directory..."
 mkdir -p "${REPLICA_DATA_DIR}"
@@ -69,12 +95,21 @@ docker run --name "${REPLICA_CONTAINER}" \
   -v "${REPLICA_VOLUME}:/var/lib/postgresql" \
   -d "${POSTGRES_IMAGE}" >/dev/null
 
+echo "Waiting for replica to become ready..."
+wait_for_postgres "${REPLICA_CONTAINER}"
+
 echo "Validating replica recovery mode..."
 docker exec "${REPLICA_CONTAINER}" psql -U "${POSTGRES_USER}" -tAc "SELECT pg_is_in_recovery();"
 
 echo "Validating replication on primary..."
-docker exec "${PRIMARY_CONTAINER}" psql -U "${POSTGRES_USER}" -x -c \
-  "SELECT client_addr, state, sync_state, write_lsn, flush_lsn, replay_lsn FROM pg_stat_replication;"
+REPLICATION_QUERY="SELECT client_addr, state, sync_state, write_lsn, flush_lsn, replay_lsn FROM pg_stat_replication"
+if [ -n "${SYNC_STATE}" ]; then
+  echo "Applying replication filter: sync_state='${SYNC_STATE}'"
+  REPLICATION_QUERY="${REPLICATION_QUERY} WHERE sync_state = '${SYNC_STATE}'"
+fi
+REPLICATION_QUERY="${REPLICATION_QUERY};"
+
+docker exec "${PRIMARY_CONTAINER}" psql -U "${POSTGRES_USER}" -x -c "${REPLICATION_QUERY}"
 
 echo "Replica setup complete."
 echo "Primary: ${PRIMARY_CONTAINER} on ${PRIMARY_PORT}"

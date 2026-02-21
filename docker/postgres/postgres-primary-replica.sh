@@ -17,6 +17,18 @@ POSTGRES_PASSWORD="${POSTGRES_PASSWORD:-postgres}"
 POSTGRES_DB="${POSTGRES_DB:-ecommerce}"
 REPLICATION_USER="${REPLICATION_USER:-replicator}"
 REPLICATION_PASSWORD="${REPLICATION_PASSWORD:-replicator_pass}"
+SYNC_STATE="${SYNC_STATE:-async}"
+
+if [ -n "${SYNC_STATE}" ]; then
+  SYNC_STATE="$(printf '%s' "${SYNC_STATE}" | tr '[:upper:]' '[:lower:]')"
+  case "${SYNC_STATE}" in
+    async|sync|potential|quorum) ;;
+    *)
+      echo "Invalid SYNC_STATE='${SYNC_STATE}'. Allowed: async, sync, potential, quorum." >&2
+      exit 1
+      ;;
+  esac
+fi
 
 # Wait until Postgres responds to health checks in a given container.
 wait_for_postgres() {
@@ -124,8 +136,14 @@ echo "Replica recovery mode:"
 docker exec "${REPLICA_CONTAINER}" psql -U "${POSTGRES_USER}" -tAc "SELECT pg_is_in_recovery();"
 
 echo "Primary replication status:"
-docker exec "${PRIMARY_CONTAINER}" psql -U "${POSTGRES_USER}" -x -c \
-  "SELECT client_addr, state, sync_state, write_lsn, flush_lsn, replay_lsn FROM pg_stat_replication;"
+REPLICATION_QUERY="SELECT client_addr, state, sync_state, write_lsn, flush_lsn, replay_lsn FROM pg_stat_replication"
+if [ -n "${SYNC_STATE}" ]; then
+  echo "Applying replication filter: sync_state='${SYNC_STATE}'"
+  REPLICATION_QUERY="${REPLICATION_QUERY} WHERE sync_state = '${SYNC_STATE}'"
+fi
+REPLICATION_QUERY="${REPLICATION_QUERY};"
+
+docker exec "${PRIMARY_CONTAINER}" psql -U "${POSTGRES_USER}" -x -c "${REPLICATION_QUERY}"
 
 echo "Primary and replica setup complete."
 echo "Primary: ${PRIMARY_CONTAINER} on port ${PRIMARY_PORT}"
