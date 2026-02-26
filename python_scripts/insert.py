@@ -52,7 +52,8 @@ def insert_product(payload):
 def insert_bulk_products(payloads):
     response = requests.post(INSERT_BULK_API, json=payloads)
     if response.status_code == 201:
-        print(f"Inserted Bulk Products: {response.json()}")
+        # print(f"Inserted Bulk Products: {response.json()}")
+        pass
     else:
         print(f"Failed to insert bulk products: {response.text}")
 
@@ -119,7 +120,7 @@ def load_csv_and_insert_bulk(path: str, limit: int = 100000):
             print(f"Skipping row {idx} due to serialization error: {e}")
             # print(row)
 
-        if len(payloads) == 1000:
+        if len(payloads) == 10000:
             # print(payloads)
             insert_bulk_products(payloads)
             payloads.clear()
@@ -142,4 +143,4 @@ if __name__ == "__main__":
     # # Fetch products with filters
     # fetch_products(category="Electronics", min_price=50.0, max_price=500.0)
 
-    load_csv_and_insert_bulk("external-data/processed_amazon_uk_products.csv", limit=1000)
+    load_csv_and_insert_bulk("external-data/processed_amazon_uk_products.csv", limit=-1)

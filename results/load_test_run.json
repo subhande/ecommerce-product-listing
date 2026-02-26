@@ -1,0 +1,106 @@
+{
+  "started_at": "2026-02-26T06:37:56.450546+05:30",
+  "finished_at": "2026-02-26T06:48:43.528352+05:30",
+  "duration_ms": 647098,
+  "config": {
+    "base_url": "http://localhost:8080",
+    "total_requests": 100000,
+    "concurrency": 100,
+    "bulk_size": 25,
+    "timeout": 10000000000,
+    "values_file": "loadtest/query_values.json",
+    "output_path": "results/load_test_run.json",
+    "seed": 1772068076448595000,
+    "get_weight": 50,
+    "post_weight": 25,
+    "bulk_weight": 25
+  },
+  "totals": {
+    "endpoint": "ALL",
+    "requests": 100000,
+    "successes": 99957,
+    "failures": 43,
+    "success_rate": 99.957,
+    "StatusCodes": {
+      "200": 49863,
+      "201": 50094,
+      "transport_error": 43
+    },
+    "latency_ms": {
+      "min": 129.503,
+      "max": 10007.398,
+      "avg": 642.8445663400033,
+      "p50": 512.537,
+      "p90": 1049.5171,
+      "p95": 1395.1318499999984,
+      "p99": 2509.5606399999997
+    }
+  },
+  "endpoint_stats": [
+    {
+      "endpoint": "GET /api/v1/products",
+      "requests": 49906,
+      "successes": 49863,
+      "failures": 43,
+      "success_rate": 99.91383801546908,
+      "StatusCodes": {
+        "200": 49863,
+        "transport_error": 43
+      },
+      "latency_ms": {
+        "min": 129.503,
+        "max": 10007.398,
+        "avg": 646.5664289864939,
+        "p50": 506.618,
+        "p90": 1046.6840000000002,
+        "p95": 1414.173999999999,
+        "p99": 2784.190799999999
+      },
+      "error_samples": [
+        "Get \"http://localhost:8080/api/v1/products?page_size=100\u0026search_query_text=ssd\u0026search_type=fts\u0026sort_by_column=price\u0026sort_order=asc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)",
+        "Get \"http://localhost:8080/api/v1/products?page_size=100\u0026search_query_text=ssd\u0026search_type=fts\u0026sort_by_column=price\u0026sort_order=asc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)",
+        "Get \"http://localhost:8080/api/v1/products?page_size=100\u0026search_query_text=ssd\u0026search_type=fts\u0026sort_by_column=price\u0026sort_order=asc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)",
+        "Get \"http://localhost:8080/api/v1/products?page_size=50\u0026search_query_text=ssd\u0026search_type=fts\u0026sort_by_column=price\u0026sort_order=asc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)",
+        "Get \"http://localhost:8080/api/v1/products?category=Sports+%26+Outdoors\u0026page_number=20\u0026page_size=10\u0026search_query_text=ssd\u0026search_type=fts\u0026sort_by_column=price\u0026sort_order=asc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+      ]
+    },
+    {
+      "endpoint": "POST /api/v1/products",
+      "requests": 25042,
+      "successes": 25042,
+      "failures": 0,
+      "success_rate": 100,
+      "StatusCodes": {
+        "201": 25042
+      },
+      "latency_ms": {
+        "min": 131.083,
+        "max": 7949.992,
+        "avg": 597.2771008306024,
+        "p50": 483.975,
+        "p90": 979.2148000000001,
+        "p95": 1285.2606499999997,
+        "p99": 2049.1140399999995
+      }
+    },
+    {
+      "endpoint": "POST /api/v1/products/bulk",
+      "requests": 25052,
+      "successes": 25052,
+      "failures": 0,
+      "success_rate": 100,
+      "StatusCodes": {
+        "201": 25052
+      },
+      "latency_ms": {
+        "min": 152.771,
+        "max": 8189.528,
+        "avg": 680.9795333705877,
+        "p50": 552.0364999999999,
+        "p90": 1111.8793,
+        "p95": 1459.1813999999986,
+        "p99": 2472.423969999999
+      }
+    }
+  ]
+}

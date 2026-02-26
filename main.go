@@ -6,10 +6,26 @@ import (
 	"ecommerce_product_listing/repository"
 	"ecommerce_product_listing/service"
 	"fmt"
+	"os"
+	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 )
+
+const defaultBodyLimitMB = 100
+
+func getBodyLimitBytes() int {
+	limitMB := defaultBodyLimitMB
+
+	if v := os.Getenv("BODY_LIMIT_MB"); v != "" {
+		if parsed, err := strconv.Atoi(v); err == nil && parsed > 0 {
+			limitMB = parsed
+		}
+	}
+
+	return limitMB * 1024 * 1024
+}
 
 func main() {
 	config.LoadEnv()
@@ -21,6 +37,7 @@ func main() {
 	handler := &handler.ProductHandler{Service: service}
 
 	app := fiber.New(fiber.Config{
+		BodyLimit: getBodyLimitBytes(),
 		ErrorHandler: func(c *fiber.Ctx, err error) error {
 			// Default 500
 			code := fiber.StatusInternalServerError

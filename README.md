@@ -19,6 +19,35 @@
 - [ ] Caching with Redis for popular queries
 - [ ] ElasticSearch for full-text search and complex filtering
 
+## Go Load Testing Suite
+
+The repository now includes a Go-based load testing CLI that tests:
+- `POST /api/v1/products` (single create with random fake product data)
+- `POST /api/v1/products/bulk` (bulk create with random fake product data)
+- `GET /api/v1/products` (randomized query patterns from JSON value pools)
+
+### Value pool config
+- File: `loadtest/query_values.json`
+- Update this JSON with categories, brands, search terms, sort columns/orders, price ranges, ratings, and page sizes.
+
+### Run
+```bash
+go run ./cmd/loadtest \
+  --base-url http://localhost:8080 \
+  --total-requests 2000 \
+  --concurrency 50 \
+  --bulk-size 25 \
+  --values-file loadtest/query_values.json \
+  --output results/load_test_run.json
+```
+
+### Useful flags
+- `--get-weight`, `--post-weight`, `--bulk-weight`: traffic mix across endpoints.
+- `--timeout`: request timeout (example `10s`).
+- `--seed`: deterministic randomization.
+- `--output`: results file path (defaults to timestamped file in `results/`).
+
+The output file contains per-endpoint and overall totals, success/failure counts, status-code distribution, latency stats (`min`, `max`, `avg`, `p50`, `p90`, `p95`, `p99`), and sample errors.
 
 ## Day 1 Architecture (upto 1k products)
 
@@ -149,5 +178,4 @@ Your repository uses ILIKE with wildcards (e.g., %query%), which makes standard 
 | Search + Popularity - Full-Text Search             | vector | ~1M          | 413         | 134        | 84        | 100.79                 | 76                        | 89                     | 76                     | 84                     |
 
 ## Filter
-
 
